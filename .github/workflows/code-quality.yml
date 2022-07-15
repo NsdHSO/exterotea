@@ -27,6 +27,9 @@ jobs:
         with:
           node-version: 16
 
+      - name: Install Dependencies
+          run: npm install
+          
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
         with:

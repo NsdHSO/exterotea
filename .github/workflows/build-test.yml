@@ -1,49 +1,34 @@
-name: Build and Test
+
+name: build-test
 
 on:
+  pull_request:
+    paths-ignore:
+      - '**.md'
   push:
-    branches: [geea]
+    branches:
+      - geea
+      - main
+      - releases/*
+    paths-ignore:
+      - '**.md'
 
 jobs:
   build:
-    name: Build & Test
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [16.x]
-
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - name: Cache node modules
-        uses: actions/cache@v1
+      - uses: actions/checkout@v3
+      - name: Setup Node 16.x
+        uses: actions/setup-node@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v1.4.2
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Unit Tests
-        run: npm run ci:test
-
-      - name: Clean Distribution Directory
-        run: npm run ci:clean
-
-      - name: Build Application
-        run: npm run ci:build
-
-      - name: List Files in Distribution Directory
-        run: ls -R ./dist
-
-      - name: Run codacy-coverage-reporter
-        uses: codacy/codacy-coverage-reporter-action@master
-        with:
-          project-token: ${{ secrets.CODACY_CODE_COVERAGE_TOKEN }}
-          coverage-reports: coverage/lcov.info
+          node-version: 16.x
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run format-check
+      - run: npm test
+      - name: Lint code
+          run: npm run lint

@@ -11,6 +11,7 @@ on:
       - 'next-major'
       - 'beta'
       - 'alpha'
+      - 'geea'
       - '!all-contributors/**'
   pull_request:
     types: [opened, synchronize]

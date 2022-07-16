@@ -5,6 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
+/** *************************************************************************************************
+ * App Component
+ */
 export class AppComponent {
   title = 'exterotea';
 }

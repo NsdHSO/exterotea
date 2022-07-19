@@ -24,7 +24,7 @@
     "@angular/router": "^14.0.0",
     "@ngrx/store": "^14.0.2",
     "ngx-liburg": "0.0.4",
-    "ngx-liburg-frame-side": "^0.0.3",
+    "ngx-liburg-frame-side": "^0.0.4",
     "ngx-liburg-icon": "^0.0.8",
     "normalize.css": "^8.0.1",
     "reset-css": "^5.0.1",

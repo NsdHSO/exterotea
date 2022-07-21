@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [{
-  path: "dashboard",
-  loadChildren: () => import('./modules/dasboard-planning/dashboard-planning.module').then(m => m.DashboardPlanningModule)
+  path: 'dashboard',
+  loadChildren: () => import('./modules/dasboard-planning/dashboard-planning.module').then((m) => m.DashboardPlanningModule)
 }];
 
 @NgModule({

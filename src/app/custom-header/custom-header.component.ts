@@ -5,11 +5,18 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './custom-header.component.html',
   styleUrls: ['./custom-header.component.scss']
 })
+/** *************************************************************************************************
+ * Header Component
+ */
 export class CustomHeaderComponent implements OnInit {
-
+  /** *************************************************************************************************
+   * Constructor Header Component
+   */
   constructor() { }
 
+  /** *************************************************************************************************
+   * Init Header Component
+   */
   ngOnInit(): void {
   }
-
 }

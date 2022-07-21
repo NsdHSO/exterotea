@@ -8,9 +8,9 @@ describe('DasboardPlanningComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardPlanningComponent ]
+      declarations: [DashboardPlanningComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DashboardPlanningComponent);
     component = fixture.componentInstance;

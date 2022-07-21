@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {DashboardPlanningComponent} from './dashboard-planning.component';
-import {DashboardPlanningRoutingModule} from "./dashboard-planning-routing.module";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DashboardPlanningComponent } from './dashboard-planning.component';
+import { DashboardPlanningRoutingModule } from './dashboard-planning-routing.module';
 
 
 @NgModule({
@@ -13,5 +13,9 @@ import {DashboardPlanningRoutingModule} from "./dashboard-planning-routing.modul
     DashboardPlanningRoutingModule
   ]
 })
+
+/** *************************************************************************************************
+ * Module Planning
+ */
 export class DashboardPlanningModule {
 }

@@ -9,12 +9,11 @@ import { IconCoreModule } from 'ngx-liburg-icon';
 import { FrameWholeModule } from 'ngx-liburg-frame-side';
 import { CustomHeaderComponent } from './custom-header/custom-header.component';
 import { CONFIG_MAIN } from './@core/routerConfig';
-import { reducers } from './modules/dasboard-planning/store/dashboard-planning.reducer';
+import {reducers} from './modules/dasboard-planning/store/dashboard-planning.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { DashboardEffects } from './modules/dasboard-planning/store/dashboard.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-
 @NgModule({
   declarations: [
     AppComponent,

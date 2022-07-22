@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { ConstDashboard } from './store/dashboard-planning.actions';
+import {InitDashboard} from "ngx-liburg-frame-side";
 
 @Component({
   selector: 'app-dasboard-planning',
@@ -18,15 +18,15 @@ export class DashboardPlanningComponent implements OnInit {
   /** *************************************************************************************************
    * Constructor Dashboard Planning Component
    */
-  constructor(private store: Store<{ shoppingList: number[] }>) {
-    this.count$ = store.select('shoppingList');
+  constructor(private store: Store<{ 'frameReducer': number[] }>) {
+    this.count$ = store.select('frameReducer');
   }
 
   /** *************************************************************************************************
    * Init Dashboard Planning Component
    */
   ngOnInit(): void {
-    this.count$.subscribe((resp) => resp);
+    this.count$.subscribe((resp) =>console.log( resp));
   }
 
   /** *************************************************************************************************
@@ -34,7 +34,7 @@ export class DashboardPlanningComponent implements OnInit {
    * @return {void}
    */
   addIngredient():void {
-    this.store.dispatch(new ConstDashboard([1, 2, 22224, 22212]));
+    this.store.dispatch(new InitDashboard([1, 2, 22224, 22212]));
   }
 }
 

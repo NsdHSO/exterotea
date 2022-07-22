@@ -11,14 +11,14 @@ export enum DashboardTypes {
  * Init Action
  */
 export class InitDashboard implements Action {
-  readonly type: string = DashboardTypes.Init;
+  readonly type: any = DashboardTypes.Init;
 
   /** *************************************************************************************************
    * Init Action
    * @constructor
    * @param {number} payload
    */
-  constructor(public payload: number[]) {
+  constructor(public payload: any[]) {
   }
 }
 

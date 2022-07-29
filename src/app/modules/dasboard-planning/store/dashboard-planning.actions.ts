@@ -18,7 +18,7 @@ export class InitDashboard implements Action {
    * @constructor
    * @param {number} payload
    */
-  constructor(public payload: any[]) {
+  constructor(public payload: {currentIndex: number, previousIndex: number}) {
   }
 }
 

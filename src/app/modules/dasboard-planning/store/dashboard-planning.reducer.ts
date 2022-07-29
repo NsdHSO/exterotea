@@ -3,11 +3,11 @@ import {Action, ActionReducerMap, combineReducers} from '@ngrx/store';
 import {framePlanningReducer} from "ngx-liburg-frame-side";
 
 export interface ShoppingListState{
-  ingredients: Array<number>;
+  listsDashboard: Array<string[]>
 }
 
 const initialState: ShoppingListState = {
-  ingredients: []
+  listsDashboard : [['TEST', 'TET@', 'TEST#'], ['TEAGS@@', 'ASGA231', 'TEST11']]
 };
 /** *************************************************************************************************
  * Dashboard Reducer
@@ -18,18 +18,14 @@ const initialState: ShoppingListState = {
 export function dashboardPlanningReducer(state :ShoppingListState = initialState, action: any): ShoppingListState {
   switch (action.type) {
   case DashboardTypes.Init:
-    return {
+
+    return <ShoppingListState>{
       ...state,
-      ingredients: [...state.ingredients, ...action.payload]
-    };
-  case DashboardTypes.Const:
-    return {
-      ...state,
-      ingredients: [...state.ingredients, ...action.payload]
+      listsDashboard: [...state.listsDashboard, action.payload]
     };
   default:
     return {
-      ingredients: initialState.ingredients
+      ...initialState
     };
   }
 }
@@ -46,7 +42,6 @@ export const reducers: ActionReducerMap<any> = {
 };
 
 export const reducerss : any  = combineReducers({
-    frameReducer: framePlanningReducer,
-    shoppingList: dashboardPlanningReducer,
-}, {shoppingList: {ingredients: [1112412,123124124,12414124]}, frameReducer:{ingredients:[121212]}})
-
+  frameReducer: framePlanningReducer,
+  shoppingList: dashboardPlanningReducer,
+})

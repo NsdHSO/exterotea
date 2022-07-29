@@ -1,2 +1,32 @@
-<p>dasboard-planning works!</p>
-<button (click)="addIngredient()">Add Ingredient </button>
+<div class="content">
+  <div class="content__header">
+    <div class="example-container">
+      <h2>To do</h2>
+
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="(containerList|async).listsDashboard[0]"
+        [cdkDropListConnectedTo]="[doneList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of (containerList|async).listsDashboard[0]" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h2>To do</h2>
+
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="(containerList|async).listsDashboard[1]"
+        [cdkDropListConnectedTo]="[todoList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of (containerList|async).listsDashboard[1]" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+

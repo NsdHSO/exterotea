@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import {InitDashboard} from "ngx-liburg-frame-side";
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {InitDashboard} from "./store/dashboard-planning.actions";
 
 @Component({
   selector: 'app-dasboard-planning',
@@ -13,28 +14,38 @@ import {InitDashboard} from "ngx-liburg-frame-side";
  * Dashboard Planning Component
  */
 export class DashboardPlanningComponent implements OnInit {
-  count$: Observable<number[]>;
+  containerList: Observable<any>;
+  user: string = "";
 
   /** *************************************************************************************************
    * Constructor Dashboard Planning Component
    */
-  constructor(private store: Store<{ 'frameReducer': number[] }>) {
-    this.count$ = store.select('frameReducer');
+  constructor(private store: Store<{ 'shoppingList': number[] }>) {
+    this.containerList = store.select('shoppingList');
   }
 
   /** *************************************************************************************************
    * Init Dashboard Planning Component
    */
   ngOnInit(): void {
-    this.count$.subscribe((resp) =>console.log( resp));
+    this.containerList.subscribe((resp) => this.user = resp.listsDashboard);
   }
 
   /** *************************************************************************************************
-   * Ingredient From Dashboard Component
+   *
    * @return {void}
    */
-  addIngredient():void {
-    this.store.dispatch(new InitDashboard([1, 2, 22224, 22212]));
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
   }
 }
 

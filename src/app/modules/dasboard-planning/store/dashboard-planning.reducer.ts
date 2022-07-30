@@ -19,10 +19,19 @@ const initialState: LayoutDashboard = {
 export function dashboardPlanningReducer(state: LayoutDashboard = initialState, action: any): LayoutDashboard {
   switch (action.type) {
     case DashboardTypes.MoveItemInList:
+      const listDashboard = state.listsDashboard[0]
+
+      const update = [
+        ...listDashboard,
+        ...['dasdas']
+      ]
+
+      const updateList = [...state.listsDashboard]
+      updateList[0] = update
 
       return <LayoutDashboard>{
         ...state,
-        listsDashboard: [...state.listsDashboard[0] = [...action.payload.item, 'dasdasd'], action.payload.item]
+        listsDashboard: updateList
       };
     default:
       return {

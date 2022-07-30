@@ -2,15 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardPlanningComponent } from './dashboard-planning.component';
 import {MockStore, provideMockStore} from "@ngrx/store/testing";
-import {ShoppingListState} from "./store/dashboard-planning.reducer";
+import {LayoutDashboard} from "./store/dashboard-planning.reducer";
 import {Store, MemoizedSelector} from "@ngrx/store";
 import {By} from "@angular/platform-browser";
 
 describe('DasboardPlanningComponent', () => {
   let component: DashboardPlanningComponent;
   let fixture: ComponentFixture<DashboardPlanningComponent>;
-  let fakeStore: MockStore<ShoppingListState>
-  let initialState = {listsDashboard: [['sdasd']]} as ShoppingListState
+  let fakeStore: MockStore<LayoutDashboard>
+  let initialState = {listsDashboard: [['sdasd']]} as LayoutDashboard
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -32,8 +32,8 @@ describe('DasboardPlanningComponent', () => {
   });
 
   it('state about user', () => {
-    fakeStore.subscribe((stateStore:ShoppingListState) => {
-      expect(stateStore).toEqual({listsDashboard: [['sdasd']]} as ShoppingListState)
+    fakeStore.subscribe((stateStore:LayoutDashboard) => {
+      expect(stateStore).toEqual({listsDashboard: [['sdasd']]} as LayoutDashboard)
     })
   });
 });

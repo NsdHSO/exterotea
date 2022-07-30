@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 export enum DashboardTypes {
 // eslint-disable-next-line no-unused-vars
-  Init = '[DASHBOARD COMPONENT] INIT',
+  MoveItemInList = '[DASHBOARD COMPONENT] INIT',
 // eslint-disable-next-line no-unused-vars
   Const = '[DASHBOARD COMPONENT] Constructor'
 }
@@ -10,31 +10,17 @@ export enum DashboardTypes {
 /** *************************************************************************************************
  * Init Action
  */
-export class InitDashboard implements Action {
-  readonly type: any = DashboardTypes.Init;
+export class MoveInsideList implements Action {
+  readonly type: any = DashboardTypes.MoveItemInList;
 
   /** *************************************************************************************************
    * Init Action
    * @constructor
    * @param {number} payload
    */
-  constructor(public payload: {currentIndex: number, previousIndex: number}) {
+  constructor(public payload: {currentIndex: number, previousIndex: number, item: string[]}){
   }
 }
 
-/** *************************************************************************************************
- * Constructor Action
- */
-export class ConstDashboard implements Action {
-  readonly type: string = DashboardTypes.Const;
-
-  /** *************************************************************************************************
-   * Const Action
-   * @constructor
-   * @param {number} payload
-   */
-  constructor(public payload: number[]) {
-  }
-}
-
-export type Dashboard = InitDashboard | ConstDashboard
+// export type Dashboard = MoveInsideList | ConstDashboard
+export type Dashboard = MoveInsideList

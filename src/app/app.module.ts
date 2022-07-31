@@ -12,6 +12,7 @@ import { CONFIG_MAIN } from './@core/routerConfig';
 import {reducers} from './modules/dasboard-planning/store/dashboard-planning.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { environment } from '../environments/environment';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    DragDropModule,
     FrameWholeModule.forRoot(CONFIG_MAIN),
     IconCoreModule,
     StoreModule.forRoot(reducers),

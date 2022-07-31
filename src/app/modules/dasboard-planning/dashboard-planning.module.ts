@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DashboardPlanningComponent} from './dashboard-planning.component';
 import {DashboardPlanningRoutingModule} from './dashboard-planning-routing.module';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -10,7 +11,10 @@ import {DashboardPlanningRoutingModule} from './dashboard-planning-routing.modul
   imports: [
     CommonModule,
     DashboardPlanningRoutingModule,
-
+    DragDropModule,
+  ],
+  exports:[
+    DragDropModule
   ]
 })
 

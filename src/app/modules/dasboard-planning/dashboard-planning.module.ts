@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {DashboardPlanningComponent} from './dashboard-planning.component';
 import {DashboardPlanningRoutingModule} from './dashboard-planning-routing.module';
 
-
 @NgModule({
   declarations: [
     DashboardPlanningComponent

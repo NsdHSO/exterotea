@@ -12,20 +12,22 @@ import { CONFIG_MAIN } from './@core/routerConfig';
 import {reducers} from './modules/dasboard-planning/store/dashboard-planning.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 @NgModule({
   declarations: [
     AppComponent,
     CustomHeaderComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    TableMaterialModule,
+    BrowserModule,
+    DragDropModule,
+    FrameWholeModule.forRoot(CONFIG_MAIN),
+    IconCoreModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ logOnly: !environment.production }),
-    IconCoreModule,
-    FrameWholeModule.forRoot(CONFIG_MAIN
-    )
+    TableMaterialModule,
+
   ],
   providers: [Store],
   bootstrap: [AppComponent]

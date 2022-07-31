@@ -49,7 +49,6 @@ export class DashboardPlanningComponent implements OnInit {
 
         for (let j = event.previousIndex; j > event.currentIndex; j--) {
           array[j] = array[j - 1]
-          console.log(array[j])
         }
         array[event.currentIndex] = temp
       } else {

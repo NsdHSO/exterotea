@@ -7,7 +7,7 @@ export interface LayoutDashboard {
 }
 
 const initialState: LayoutDashboard = {
-  listsDashboard: [['TEST', 'TET@', 'TEST#'], ['TEAGS@@§', 'ASGA231', 'TEST11']]
+  listsDashboard: [['TEST', 'TET@', 'TEST#', "TESFA@#!!", "dasdasd", "BCR#$#!"], ['TEAGS@@§', 'ASGA231', 'TEST11']]
 };
 
 /** *************************************************************************************************
@@ -19,11 +19,9 @@ const initialState: LayoutDashboard = {
 export function dashboardPlanningReducer(state: LayoutDashboard = initialState, action: any): LayoutDashboard {
   switch (action.type) {
     case DashboardTypes.MoveItemInList:
-      const listDashboard = state.listsDashboard[0]
 
       const update = [
-        ...listDashboard,
-        ...['dasdas']
+        ...action.payload.item,
       ]
 
       const updateList = [...state.listsDashboard]

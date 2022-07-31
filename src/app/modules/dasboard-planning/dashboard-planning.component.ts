@@ -37,7 +37,29 @@ export class DashboardPlanningComponent implements OnInit {
    */
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      this.store.dispatch(new MoveInsideList({currentIndex: event.currentIndex, previousIndex:event.previousIndex, item:event.container.data}))
+      let array = [...event.container.data]
+      let temp = array[event.previousIndex];
+
+      if (event.currentIndex - event.previousIndex >= 2) {
+        for (let i = event.previousIndex; i < event.currentIndex; i++) {
+          array[i] = array[i + 1]
+        }
+        array[event.currentIndex] = temp
+      } else if (event.previousIndex > event.currentIndex) {
+
+        for (let j = event.previousIndex; j > event.currentIndex; j--) {
+          array[j] = array[j - 1]
+          console.log(array[j])
+        }
+        array[event.currentIndex] = temp
+      } else {
+        [array[event.previousIndex], array[event.currentIndex]] = [array[event.currentIndex], array[event.previousIndex]]
+      }
+      this.store.dispatch(new MoveInsideList({
+        currentIndex: event.currentIndex,
+        previousIndex: event.previousIndex,
+        item: array
+      }))
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(

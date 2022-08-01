@@ -11,13 +11,13 @@ const initialState: LayoutDashboard = {
 };
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 /** *************************************************************************************************
  * Dashboard Reducer
  * @return {LayoutDashboard} an objectÏ
  * @param {LayoutDashboard} state  The state
  * @param {Dashboard} action The action
  */
+/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types,require-jsdoc */
 export function dashboardPlanningReducer(state: LayoutDashboard = initialState, action: any): LayoutDashboard {
   switch (action.type) {
   case DashboardTypes.MoveItemInList:

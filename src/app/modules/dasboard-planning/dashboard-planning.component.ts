@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Store} from '@ngrx/store';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
-import {DashboardTypes, MoveInsideList} from "./store/dashboard-planning.actions";
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MoveInsideList } from './store/dashboard-planning.actions';
 
 @Component({
   selector: 'app-dasboard-planning',
@@ -14,8 +14,9 @@ import {DashboardTypes, MoveInsideList} from "./store/dashboard-planning.actions
  * Dashboard Planning Component
  */
 export class DashboardPlanningComponent implements OnInit {
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   containerList: Observable<any>;
-  user: string = "";
+  user: string = '';
 
   /** *************************************************************************************************
    * Constructor Dashboard Planning Component
@@ -32,40 +33,39 @@ export class DashboardPlanningComponent implements OnInit {
   }
 
   /** *************************************************************************************************
-   *
-   * @return {void}
+   * @param {CdkDragDrop<string[]>} event coming from UI
+   * @return {void} Nothing to be returned
    */
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>): void {
     if (event.previousContainer === event.container) {
-      let array = [...event.container.data]
-      let temp = array[event.previousIndex];
+      const array = [...event.container.data];
+      const temp = array[event.previousIndex];
 
       if (event.currentIndex - event.previousIndex >= 2) {
         for (let i = event.previousIndex; i < event.currentIndex; i++) {
-          array[i] = array[i + 1]
+          array[i] = array[i + 1];
         }
-        array[event.currentIndex] = temp
+        array[event.currentIndex] = temp;
       } else if (event.previousIndex > event.currentIndex) {
-
         for (let j = event.previousIndex; j > event.currentIndex; j--) {
-          array[j] = array[j - 1]
+          array[j] = array[j - 1];
         }
-        array[event.currentIndex] = temp
+        array[event.currentIndex] = temp;
       } else {
-        [array[event.previousIndex], array[event.currentIndex]] = [array[event.currentIndex], array[event.previousIndex]]
+        [array[event.previousIndex], array[event.currentIndex]] = [array[event.currentIndex], array[event.previousIndex]];
       }
       this.store.dispatch(new MoveInsideList({
         currentIndex: event.currentIndex,
         previousIndex: event.previousIndex,
         item: array
-      }))
+      }));
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     }
   }

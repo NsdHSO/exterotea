@@ -11,6 +11,7 @@ export enum DashboardTypes {
  * Init Action
  */
 export class MoveInsideList implements Action {
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   readonly type: any = DashboardTypes.MoveItemInList;
 
   /** *************************************************************************************************
@@ -18,7 +19,7 @@ export class MoveInsideList implements Action {
    * @constructor
    * @param {number} payload
    */
-  constructor(public payload: {currentIndex: number, previousIndex: number, item: string[]}){
+  constructor(public payload: {currentIndex: number, previousIndex: number, item: string[]}) {
   }
 }
 

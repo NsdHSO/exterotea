@@ -9,10 +9,10 @@ import { IconCoreModule } from 'ngx-liburg-icon';
 import { FrameWholeModule } from 'ngx-liburg-frame-side';
 import { CustomHeaderComponent } from './custom-header/custom-header.component';
 import { CONFIG_MAIN } from './@core/routerConfig';
-import {reducers} from './modules/dasboard-planning/store/dashboard-planning.reducer';
+import { reducers } from './modules/dasboard-planning/store/dashboard-planning.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import {DragDropModule} from "@angular/cdk/drag-drop";
+import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +26,7 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     IconCoreModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ logOnly: !environment.production }),
-    TableMaterialModule,
+    TableMaterialModule
 
   ],
   providers: [Store],

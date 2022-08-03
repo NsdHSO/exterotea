@@ -37,6 +37,9 @@ export class DashboardPlanningComponent implements OnInit {
    * @return {void} Nothing to be returned
    */
   drop(event: CdkDragDrop<string[]>): void {
+    const getCurrentContainer = parseInt(event.container.id.split('-').pop() ?? '0', 10);
+    const getPreviousContainer = parseInt(event.previousContainer.id.split('-').pop() ?? '0', 10);
+
     if (event.previousContainer === event.container) {
       const array = [...event.container.data];
       const temp = array[event.previousIndex];
@@ -55,12 +58,28 @@ export class DashboardPlanningComponent implements OnInit {
         [array[event.previousIndex], array[event.currentIndex]] = [array[event.currentIndex], array[event.previousIndex]];
       }
       this.store.dispatch(new MoveInsideList({
-        currentIndex: event.currentIndex,
+        containerIndex: { currenIndex: getCurrentContainer, previousIndex: getCurrentContainer },
         previousIndex: event.previousIndex,
-        item: array
+        item: array,
+        previous: array
       }));
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      const item = event.previousContainer.data[event.previousIndex];
+      const array = [...event.previousContainer.data];
+      const currentArray = [...event.container.data];
+      for (let i = event.previousIndex; i <= event.previousContainer.data.length - 1; i++) {
+        array[i] = array[i + 1];
+      }
+      array.pop();
+      currentArray.splice(event.currentIndex, 0, item);
+
+      this.store.dispatch(new MoveInsideList({
+        containerIndex: { currenIndex: getCurrentContainer, previousIndex: getPreviousContainer },
+        previousIndex: event.previousIndex,
+        item: currentArray,
+        previous: array
+      }));
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,

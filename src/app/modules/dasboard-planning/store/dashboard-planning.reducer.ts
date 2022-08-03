@@ -22,13 +22,12 @@ export function dashboardPlanningReducer(state: LayoutDashboard = initialState, 
   switch (action.type) {
   case DashboardTypes.MoveItemInList:
 
-    const update = [
-      ...action.payload.item
-    ];
+    const update =action.payload.item;
+    const previousUpdate =action.payload.previous;
 
     const updateList = [...state.listsDashboard];
-    updateList[0] = update;
-
+    updateList[action.payload.containerIndex.currenIndex] = update;
+    updateList[action.payload.containerIndex.previousIndex] = previousUpdate;
     return <LayoutDashboard>{
       ...state,
       listsDashboard: updateList

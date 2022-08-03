@@ -19,7 +19,7 @@ export class MoveInsideList implements Action {
    * @constructor
    * @param {number} payload
    */
-  constructor(public payload: {currentIndex: number, previousIndex: number, item: string[]}) {
+  constructor(public payload: {containerIndex: {currenIndex: number, previousIndex:number}, previousIndex: number, item: string[], previous:string[]}) {
   }
 }
 

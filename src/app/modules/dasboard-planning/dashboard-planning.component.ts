@@ -74,6 +74,8 @@ export class DashboardPlanningComponent implements OnInit {
       array.pop();
       currentArray.splice(event.currentIndex, 0, item);
 
+
+
       this.store.dispatch(new MoveInsideList({
         containerIndex: { currenIndex: getCurrentContainer, previousIndex: getPreviousContainer },
         previousIndex: event.previousIndex,

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { MoveInsideList } from './store/dashboard-planning.actions';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {MoveInsideList} from './store/dashboard-planning.actions';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-dasboard-planning',
@@ -21,7 +22,8 @@ export class DashboardPlanningComponent implements OnInit {
   /** *************************************************************************************************
    * Constructor Dashboard Planning Component
    */
-  constructor(private store: Store<{ 'shoppingList': number[] }>) {
+  constructor(private ac: ActivatedRoute,
+              private store: Store<{ 'shoppingList': number[] }>) {
     this.containerList = store.select('shoppingList');
   }
 
@@ -58,7 +60,7 @@ export class DashboardPlanningComponent implements OnInit {
         [array[event.previousIndex], array[event.currentIndex]] = [array[event.currentIndex], array[event.previousIndex]];
       }
       this.store.dispatch(new MoveInsideList({
-        containerIndex: { currenIndex: getCurrentContainer, previousIndex: getCurrentContainer },
+        containerIndex: {currenIndex: getCurrentContainer, previousIndex: getCurrentContainer},
         previousIndex: event.previousIndex,
         item: array,
         previous: array
@@ -75,7 +77,7 @@ export class DashboardPlanningComponent implements OnInit {
       currentArray.splice(event.currentIndex, 0, item);
 
       this.store.dispatch(new MoveInsideList({
-        containerIndex: { currenIndex: getCurrentContainer, previousIndex: getPreviousContainer },
+        containerIndex: {currenIndex: getCurrentContainer, previousIndex: getPreviousContainer},
         previousIndex: event.previousIndex,
         item: currentArray,
         previous: array

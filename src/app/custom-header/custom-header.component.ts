@@ -17,6 +17,8 @@ export class CustomHeaderComponent implements OnInit {
   /** *************************************************************************************************
    * Init Header Component
    */
-  ngOnInit(): void {
-  }
+
+
+  ngOnInit = (): void => {
+  };
 }

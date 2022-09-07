@@ -1,38 +1,45 @@
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { ActionReducerMap, StoreModule } from '@ngrx/store';
 
 import { DashboardPlanningComponent } from './dashboard-planning.component';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { LayoutDashboard } from './store/dashboard-planning.reducer';
-import { Store } from '@ngrx/store';
+import { dashboardPlanningReducer } from './store/dashboard-planning.reducer';
 
 describe('DasboardPlanningComponent', () => {
   let component: DashboardPlanningComponent;
   let fixture: ComponentFixture<DashboardPlanningComponent>;
-  let fakeStore: MockStore<LayoutDashboard>;
-  const initialState = { listsDashboard: [['sdasd']] } as LayoutDashboard;
 
+  const reducers: ActionReducerMap<any> = {
+    shoppingList: dashboardPlanningReducer
+  };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DashboardPlanningComponent],
+      imports: [
+        StoreModule.forRoot(
+          reducers
+        ),
+        DragDropModule
+      ],
       providers: [
-        provideMockStore({ initialState })
+        {
+          provide: ActivatedRoute, useValue: {
+            snapshot: { params: { id: 123 } }
+          }
+        }
       ]
     })
       .compileComponents();
 
-    fakeStore = TestBed.get<Store>(Store);
     fixture = TestBed.createComponent(DashboardPlanningComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('store create', () => {
 
-  it('state about user', () => {
-    fakeStore.subscribe((stateStore:LayoutDashboard) => {
-      expect(stateStore).toEqual({ listsDashboard: [['sdasd']] } as LayoutDashboard);
-    });
+    fixture.detectChanges();
+    expect(component.drop).toBeTruthy();
   });
 });

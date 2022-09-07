@@ -1,6 +1,6 @@
-import { DashboardTypes } from './dashboard-planning.actions';
 import { ActionReducerMap } from '@ngrx/store';
 import { framePlanningReducer } from 'ngx-liburg-frame-side';
+import { DashboardTypes } from './dashboard-planning.actions';
 
 export interface LayoutDashboard {
   listsDashboard: Array<string[]>

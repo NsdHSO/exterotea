@@ -1,4 +1,4 @@
-import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { ActionReducerMap, StoreModule } from '@ngrx/store';
@@ -10,7 +10,7 @@ describe('DasboardPlanningComponent', () => {
   let component: DashboardPlanningComponent;
   let fixture: ComponentFixture<DashboardPlanningComponent>;
 
-  const reducers: ActionReducerMap<any> = {
+  const reducers: ActionReducerMap<unknown> = {
     shoppingList: dashboardPlanningReducer
   };
   beforeEach(async () => {
@@ -38,7 +38,6 @@ describe('DasboardPlanningComponent', () => {
   });
 
   it('store create', () => {
-
     fixture.detectChanges();
     expect(component.drop).toBeTruthy();
   });

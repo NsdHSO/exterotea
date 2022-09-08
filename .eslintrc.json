@@ -46,7 +46,7 @@
       ],
       "rules": {
         "no-unused-vars": "warn",
-        "indent": "warn"
+        "indent": "off"
       }
     }
   ]

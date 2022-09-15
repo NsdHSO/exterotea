@@ -1,23 +1,22 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { Store, StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ENVIRONMENT } from 'ngx-environment';
+import { TableMaterialModule } from 'ngx-liburg';
+import { FrameWholeModule } from 'ngx-liburg-frame-side';
+import { IconCoreModule } from 'ngx-liburg-icon';
+import { environment } from '../environments/environment';
+import { CONFIG_MAIN } from './@core/routerConfig';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TableMaterialModule } from 'ngx-liburg';
-import { Store, StoreModule } from '@ngrx/store';
-import { IconCoreModule } from 'ngx-liburg-icon';
-import { FrameWholeModule } from 'ngx-liburg-frame-side';
 import { CustomHeaderComponent } from './custom-header/custom-header.component';
-import { CONFIG_MAIN } from './@core/routerConfig';
 import { reducers } from './modules/dasboard-planning/store/dashboard-planning.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    CustomHeaderComponent
-  ],
+  declarations: [AppComponent, CustomHeaderComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -26,15 +25,13 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     IconCoreModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ logOnly: !environment.production }),
-    TableMaterialModule
-
+    TableMaterialModule,
   ],
-  providers: [Store],
-  bootstrap: [AppComponent]
+  providers: [Store, { provide: 'env', useValue: environment }],
+  bootstrap: [AppComponent],
 })
 
 /** *************************************************************************************************
  * App module
  */
-export class AppModule {
-}
+export class AppModule {}

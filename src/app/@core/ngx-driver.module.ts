@@ -4,6 +4,6 @@ import { environment } from "../../environments/environment";
 
 @NgModule({
   declarations: [],
-  imports: [CoreDriverModule.forRoot(environment)],
+  imports: [CoreDriverModule.forRoot()],
 })
 export class NgxDriverModule {}

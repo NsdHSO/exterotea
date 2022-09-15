@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Store, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { ENVIRONMENT } from 'ngx-environment';
 import { TableMaterialModule } from 'ngx-liburg';
 import { FrameWholeModule } from 'ngx-liburg-frame-side';
 import { IconCoreModule } from 'ngx-liburg-icon';

@@ -7,18 +7,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/dasboard-planning/dashboard-planning.module').then(
         (m) => m.DashboardPlanningModule
-      ),
+      )
   },
   {
     path: 'driver',
     loadChildren: () =>
-      import('./@core/ngx-driver.module').then((m) => m.NgxDriverModule),
-  },
+      import('./@core/ngx-driver.module').then((m) => m.NgxDriverModule)
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 
 /** *************************************************************************************************

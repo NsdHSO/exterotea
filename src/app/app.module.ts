@@ -24,10 +24,10 @@ import { reducers } from './modules/dasboard-planning/store/dashboard-planning.r
     IconCoreModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ logOnly: !environment.production }),
-    TableMaterialModule,
+    TableMaterialModule
   ],
   providers: [Store, { provide: 'env', useValue: environment }],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 
 /** *************************************************************************************************

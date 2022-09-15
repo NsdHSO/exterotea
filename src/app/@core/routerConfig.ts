@@ -3,13 +3,13 @@ export const CONFIG_MAIN = Object.freeze({
     {
       path: 'dashboard',
       icon: 'fa_solid:arrow-down',
-      text: 'Dashboard',
+      text: 'Dashboard'
     },
     {
       path: 'driver',
       icon: 'fa_solid:cart-flatbed',
-      text: 'Dashboard',
-    },
+      text: 'Dashboard'
+    }
   ],
-  iconApp: '',
+  iconApp: ''
 });

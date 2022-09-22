@@ -17,6 +17,7 @@ import { reducers } from './modules/dasboard-planning/store/dashboard-planning.r
 
 @NgModule({
   declarations: [AppComponent, CustomHeaderComponent],
+
   imports: [
     AppRoutingModule,
     BrowserModule,

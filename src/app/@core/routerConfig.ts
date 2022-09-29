@@ -8,7 +8,7 @@ export const CONFIG_MAIN = Object.freeze({
     {
       path: 'driver',
       icon: 'fa_solid:cart-flatbed',
-      text: 'Dashboard'
+      text: 'Driver'
     },
     {
       path: 'meat-cow',

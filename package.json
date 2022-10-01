@@ -26,7 +26,7 @@
     "@ngrx/store": "^14.0.2",
     "angular-eslint": "0.0.1-alpha.0",
     "chart.js": "^3.9.1",
-    "cow-meat": "^0.0.3",
+    "cow-meat": "^0.0.4",
     "ng2-charts": "^4.0.1",
     "ngx-driver": "2.0.3",
     "ngx-liburg": "0.0.17",

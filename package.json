@@ -32,6 +32,7 @@
     "ngx-liburg": "0.0.17",
     "ngx-liburg-frame-side": "^0.0.28",
     "ngx-liburg-icon": "^0.0.17",
+    "ngx-to-do": "^0.0.3",
     "normalize.css": "^8.0.1",
     "prettier": "^2.7.1",
     "reset-css": "^5.0.1",

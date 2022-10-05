@@ -14,6 +14,11 @@ export const CONFIG_MAIN = Object.freeze({
       path: 'meat-cow',
       icon: 'fa_solid:cow',
       text: 'Meat Cow'
+    },
+    {
+      path: 'to-do',
+      icon: 'fa_solid:feather',
+      text: 'Todo\''
     }
   ],
   iconApp: ''

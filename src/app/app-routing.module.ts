@@ -1,12 +1,22 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {
+  RouterModule,
+  Routes
+} from '@angular/router';
 
 const routes : Routes = [
   {
-    path: 'dashboard',
+    path: 'dashboard/:id',
     loadChildren: () =>
       import('./modules/dasboard-planning/dashboard-planning.module').then(
         (m) => m.DashboardPlanningModule
+      )
+  },
+  {
+    path: 'dashboard-cow',
+    loadChildren: () =>
+      import('./@core/dashboard.module').then(
+        (m) => m.NgxDashboardModule
       )
   },
   {
@@ -23,6 +33,11 @@ const routes : Routes = [
     path: 'to-do',
     loadChildren: () =>
       import('./@core/toDo.module').then((m) => m.NgxToDoModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./@core/email.module').then((m) => m.NgxEmailModule)
   }
 ];
 

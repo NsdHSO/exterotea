@@ -1,5 +1,15 @@
-import { HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import {
+  HttpClient,
+  HttpEvent,
+  HttpHandler,
+  HttpHeaders,
+  HttpInterceptor,
+  HttpRequest
+} from '@angular/common/http';
+import {
+  Inject,
+  Injectable
+} from '@angular/core';
 import { LocalStorageService } from 'ngx-driver';
 import { Observable } from 'rxjs';
 
@@ -8,7 +18,6 @@ import { Observable } from 'rxjs';
 })
 export class HttpInterceptorService implements HttpInterceptor {
   public header : HttpHeaders = new HttpHeaders;
-
   public tokenFromLocalStorage;
 
   constructor(
@@ -20,8 +29,19 @@ export class HttpInterceptorService implements HttpInterceptor {
 
   public intercept(req : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
     const modifiedReq = req.clone({
-      headers: req.headers.set('Authorization', 'Bearer ' + this.tokenFromLocalStorage)
+      headers: req.headers.set(
+        'Authorization',
+        'Bearer ' + this.tokenFromLocalStorage)
     });
     return next.handle(modifiedReq);
+  }
+
+  public getUser() {
+    return this._httpClient.post(
+      `${this.environment.api}/elien/login`,
+      {
+        'password': 'passworsd3',
+        'name': 'Mihai Buncss111i'
+      });
   }
 }

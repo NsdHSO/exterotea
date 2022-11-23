@@ -29,6 +29,11 @@ export const CONFIG_MAIN = Object.freeze({
       path: 'email',
       icon: 'fa_solid:feather',
       text: 'Email'
+    },
+    {
+      path: 'product',
+      icon: 'fa_solid:shop',
+      text: 'Product'
     }
   ],
   iconApp: ''

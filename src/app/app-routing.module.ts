@@ -1,10 +1,14 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {
   RouterModule,
   Routes
 } from '@angular/router';
 
 const routes : Routes = [
+  {
+    path: 'product',
+    loadChildren: () => import('./@core/product.module').then(m => m.NgxProductModule)
+  },
   {
     path: 'dashboard/:id',
     loadChildren: () =>

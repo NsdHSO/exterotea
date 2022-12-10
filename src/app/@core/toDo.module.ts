@@ -7,4 +7,7 @@ import { CoreToDogModule } from 'ngx-to-do';
     CoreToDogModule.forRoot()
   ]
 })
+/**
+ *
+ */
 export class NgxToDoModule {}

@@ -21,17 +21,23 @@ export class HttpInterceptorService implements HttpInterceptor {
   public tokenFromLocalStorage;
 
   constructor(
-    private readonly _httpClient : HttpClient, @Inject('env') private environment : any,
+    private readonly _httpClient : HttpClient,
+    @Inject(
+      'env') private environment : any,
     private readonly _localStorage : LocalStorageService
   ) {
-    this.tokenFromLocalStorage = _localStorage.geItem('token');
+    this.tokenFromLocalStorage = _localStorage.geItem(
+      'token');
   }
 
-  public intercept(req : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
+  public intercept(
+    req : HttpRequest<any>,
+    next : HttpHandler) : Observable<HttpEvent<any>> {
     const modifiedReq = req.clone({
       headers: req.headers.set(
         'Authorization',
-        'Bearer ' + this.tokenFromLocalStorage)
+        'Bearer ' + this.tokenFromLocalStorage
+      )
     });
     return next.handle(modifiedReq);
   }
@@ -40,8 +46,9 @@ export class HttpInterceptorService implements HttpInterceptor {
     return this._httpClient.post(
       `${this.environment.api}/elien/login`,
       {
-        'password': 'passworsd3',
-        'name': 'Mihai Buncss111i'
-      });
+        'password': 'password',
+        'name': 'solution'
+      }
+    );
   }
 }

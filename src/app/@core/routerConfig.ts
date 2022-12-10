@@ -16,7 +16,7 @@ export const CONFIG_MAIN = Object.freeze({
       text: 'Driver'
     },
     {
-      path: 'meat-cow',
+      path: 'cow',
       icon: 'fa_solid:cow',
       text: 'Meat Cow'
     },

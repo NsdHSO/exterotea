@@ -29,7 +29,7 @@ const routes : Routes = [
       import('./@core/ngx-driver.module').then((m) => m.NgxDriverModule)
   },
   {
-    path: 'meat-cow',
+    path: 'cow',
     loadChildren: () =>
       import('./@core/ngx-cow-meat.module').then((m) => m.NgxCowMeatModule)
   },

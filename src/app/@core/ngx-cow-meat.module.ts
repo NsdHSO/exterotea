@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CoreCowModule } from 'cow-meat';
+import { CoreMeatCowModule } from 'cow-meat';
 
 @NgModule({
   declarations: [],
-  imports: [CoreCowModule.forRoot()],
+  imports: [CoreMeatCowModule.forRoot()]
 })
+/**
+ *
+ */
 export class NgxCowMeatModule {}

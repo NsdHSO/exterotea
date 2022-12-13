@@ -7,7 +7,8 @@ import {
 const routes : Routes = [
   {
     path: 'product',
-    loadChildren: () => import('./@core/product.module').then(m => m.NgxProductModule)
+    loadChildren: () => import('./@core/product.module').then(
+      (m) => m.NgxProductModule)
   },
   {
     path: 'dashboard/:id',
@@ -26,27 +27,38 @@ const routes : Routes = [
   {
     path: 'driver',
     loadChildren: () =>
-      import('./@core/ngx-driver.module').then((m) => m.NgxDriverModule)
+      import('./@core/ngx-driver.module').then(
+        (m) => m.NgxDriverModule)
   },
   {
     path: 'cow',
     loadChildren: () =>
-      import('./@core/ngx-cow-meat.module').then((m) => m.NgxCowMeatModule)
+      import('./@core/ngx-cow-meat.module').then(
+        (m) => m.NgxCowMeatModule)
   },
   {
     path: 'to-do',
     loadChildren: () =>
-      import('./@core/toDo.module').then((m) => m.NgxToDoModule)
+      import('./@core/toDo.module').then(
+        (m) => m.NgxToDoModule)
+  },
+  {
+    path: 'toDoList',
+    loadChildren: () => import('./@core/cow-todolist-module').then(
+      (m) => m.NgxCowToDoListModule)
   },
   {
     path: '',
     loadChildren: () =>
-      import('./@core/email.module').then((m) => m.NgxEmailModule)
+      import('./@core/email.module').then(
+        (m) => m.NgxEmailModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 /** *************************************************************************************************

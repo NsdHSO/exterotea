@@ -1,14 +1,23 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Store, StoreModule } from '@ngrx/store';
+import {
+  Store,
+  StoreModule
+} from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TableMaterialModule } from 'ngx-liburg';
 import { FrameWholeModule } from 'ngx-liburg-frame-side';
 import { IconCoreModule } from 'ngx-liburg-icon';
+import {
+  IConfig,
+  NgxMaskModule
+} from 'ngx-mask';
+import { ToDoListInterceptor } from 'ngx-todo-list';
 import { environment } from '../environments/environment';
 import { CONFIG_MAIN } from './@core/routerConfig';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,23 +26,41 @@ import { CustomHeaderComponent } from './custom-header/custom-header.component';
 import { reducers } from './modules/dasboard-planning/store/dashboard-planning.reducer';
 import { HttpInterceptorService } from './utils/http-interceptor.service';
 
+const maskConfig : Partial<IConfig> = {
+  validation: false
+};
+
 @NgModule({
-  declarations: [AppComponent, CustomHeaderComponent],
+  declarations: [
+    AppComponent, CustomHeaderComponent
+  ],
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     DragDropModule,
-    FrameWholeModule.forRoot(CONFIG_MAIN),
+    FrameWholeModule.forRoot(
+      CONFIG_MAIN),
     IconCoreModule,
+    MatNativeDateModule,
+    NgxMaskModule.forRoot(maskConfig),
     StoreModule.forRoot(reducers),
-    StoreDevtoolsModule.instrument({ logOnly: !environment.production }),
-    TableMaterialModule,
-    BrowserAnimationsModule
+    StoreDevtoolsModule.instrument(
+      { logOnly: !environment.production }),
+    TableMaterialModule
   ],
   providers: [
-    Store, { provide: 'env', useValue: environment }, {
+    Store, {
+      provide: 'env',
+      useValue: environment
+    }, {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ToDoListInterceptor,
       multi: true
     },
     MatDatepickerModule

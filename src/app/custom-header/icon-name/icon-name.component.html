@@ -1,0 +1,12 @@
+<div>
+<!--  <form #f="ngForm" (ngSubmit)="submit(f)">-->
+<!--    <input ngModel name="sdkId" type="number" />-->
+<!--    <div>name {{ sdkId.value }}</div>-->
+
+<!--    <div></div>-->
+<!--  </form>-->
+
+  <form [formGroup]="personInfo" (ngSubmit)="submit(personInfo)">
+    <input id="sdkId" [formControl]="personInfo.controls['sdkId'] | getFromC "/>
+  </form>
+</div>

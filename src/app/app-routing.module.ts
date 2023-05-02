@@ -1,10 +1,7 @@
-import {NgModule} from '@angular/core';
-import {
-  RouterModule,
-  Routes
-} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes : Routes = [
+const routes: Routes = [
   {
     path: 'product',
     loadChildren: () => import('./@core/product.module').then(
@@ -59,9 +56,10 @@ const routes : Routes = [
   imports: [
     RouterModule.forRoot(routes)
   ],
-  exports: [RouterModule]
+  exports: [ RouterModule ]
 })
 /** *************************************************************************************************
  * App module routing
  */
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

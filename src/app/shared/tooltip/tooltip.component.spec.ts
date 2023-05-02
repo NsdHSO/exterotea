@@ -10,7 +10,7 @@ describe('TooltipComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ TooltipComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TooltipComponent);
     component = fixture.componentInstance;

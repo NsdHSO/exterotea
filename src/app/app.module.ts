@@ -36,8 +36,7 @@ const maskConfig: Partial<IConfig> = {
   declarations: [ AppComponent,
     CustomHeaderComponent,
     IconNameComponent,
-    GetFromCPipe,
-    TooltipComponent ],
+    GetFromCPipe, ],
   imports: [
     FormsModule,
     ReactiveFormsModule,

@@ -2,9 +2,9 @@ import {
   AfterContentInit,
   Component,
   ContentChild,
-  ElementRef,
   Input,
-  OnInit, TemplateRef
+  OnInit,
+  ViewEncapsulation
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,12 +13,8 @@ import { CommonModule } from '@angular/common';
   imports: [ CommonModule ],
   standalone: true,
   templateUrl: 'tooltip.component.html',
-  styles: [ `
-    .tooltip-container {
-
-
-    }
-  ` ]
+  styleUrls: ['tooltip.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TooltipComponent implements OnInit, AfterContentInit {
   @Input() rendererTemplate: any;

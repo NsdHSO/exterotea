@@ -26,7 +26,8 @@
         <div class="example-box"
              *ngFor="let item of (containerList|async).listsDashboard[1]"
              cdkDrag
-
+             appGetMiddleEntity
+             [element] = "diffusion"
         >
 
 

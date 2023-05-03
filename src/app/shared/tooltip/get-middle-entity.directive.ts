@@ -2,11 +2,11 @@ import {
   ApplicationRef,
   ComponentFactoryResolver,
   ComponentRef,
-  ContentChild,
   Directive,
   ElementRef,
   HostListener,
   Injector,
+  Input,
   Renderer2,
   TemplateRef,
   ViewChild,
@@ -19,8 +19,8 @@ import { TooltipComponent } from './tooltip.component';
   standalone: true
 })
 export class GetMiddleEntityDirective {
+  @Input() element: any;
   @ViewChild('rendererTemplate') rendererTemplate!: TemplateRef<any>;
-  @ContentChild(TooltipComponent) tooltipComponent!: TooltipComponent;
 
   private componentRef: ComponentRef<TooltipComponent> | any;
   private tooltipRef: HTMLElement | any;
@@ -35,17 +35,22 @@ export class GetMiddleEntityDirective {
     private viewContainerRef: ViewContainerRef
   ) {
   }
-
+  get hostElement(): HTMLElement{
+    return this.elementRef.nativeElement;
+  }
   @HostListener('click', [ '$event' ])
   onClick(event: MouseEvent) {
     if ( !this.componentRef ) {
-      const hostRect = this.elementRef.nativeElement.getBoundingClientRect();
+      const hostRect = this.hostElement.getBoundingClientRect();
       const middlex = hostRect.left + hostRect.width / 2;
-      this.renderComponent(middlex, this.tooltipComponent.text);
+      this.renderComponent(middlex, 'dasd');
       this.clickEventListener = this.renderer.listen(
         window,
         'click',
         (clickEvent: MouseEvent) => {
+          const domElem = (this.componentRef.hostView as any).rootNodes[0] as HTMLElement;
+          domElem.style.left = `${ middlex - domElem.getBoundingClientRect().width / 2 }px`;
+
           if ( !this.elementRef.nativeElement.contains(clickEvent.target) && !this.tooltipRef?.contains(
             clickEvent.target) ) {
             this.destroyComponent();
@@ -61,14 +66,13 @@ export class GetMiddleEntityDirective {
       TooltipComponent);
     this.componentRef = componentFactory.create(this.injector);
     this.componentRef.instance.text = text;
-    this.componentRef.instance.rendererTemplate = this.rendererTemplate
+    this.componentRef.instance.rendererTemplate = this.element;
     this.appRef.attachView(this.componentRef.hostView);
     const domElem = (this.componentRef.hostView as any).rootNodes[0] as HTMLElement;
     document.body.appendChild(domElem);
     const hostRect = this.elementRef.nativeElement.getBoundingClientRect();
     domElem.style.position = 'fixed';
     domElem.style.top = `${ hostRect.bottom }px`;
-    domElem.style.left = `${ middlex - domElem.getBoundingClientRect().width / 2 }px`;
     domElem.style.zIndex = '100';
     this.tooltipRef = domElem;
   }

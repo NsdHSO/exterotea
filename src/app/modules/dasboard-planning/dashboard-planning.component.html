@@ -37,12 +37,14 @@
     </div>
   </div>
 </div>
-<button appGetMiddleEntity mat-raised-button>
-  Click me!
-  <app-tooltip [text]="'Ivan'">
-    <ng-template>
-      <div class="container">Hello, Renderer!</div>
-    </ng-template>
-  </app-tooltip>
+<button appGetMiddleEntity mat-raised-button [element] = "diffusion">
+  Click me [ele]!
+
 </button>
 
+<ng-template #diffusion>
+  <ng-container>
+
+    Ivan
+  </ng-container>
+</ng-template>

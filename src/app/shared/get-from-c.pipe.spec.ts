@@ -9,7 +9,7 @@ describe('GetFromCPipe', () => {
   fit('should return formControl', () => {
     const pipe = new GetFromCPipe();
     const a = new FormGroup({
-      name: new FormControl('ivn'),
+      name: new FormControl('ivn')
     });
     expect(pipe.transform(a.controls['name'])).toBeInstanceOf(FormControl);
   });

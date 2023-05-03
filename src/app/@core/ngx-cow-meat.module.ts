@@ -3,7 +3,7 @@ import { CoreMeatCowModule } from 'cow-meat';
 
 @NgModule({
   declarations: [],
-  imports: [CoreMeatCowModule.forRoot()]
+  imports: [ CoreMeatCowModule.forRoot() ]
 })
 /**
  *

@@ -8,7 +8,7 @@ describe('CustomHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CustomHeaderComponent]
+      declarations: [ CustomHeaderComponent ]
     })
       .compileComponents();
 

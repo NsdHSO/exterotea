@@ -7,7 +7,7 @@ export interface LayoutDashboard {
 }
 
 const initialState: LayoutDashboard = {
-  listsDashboard: [['TEST', 'TET@', 'TEST#', 'TESFA@#!!', 'dasdasd', 'BCR#$#!'], ['TEAGS@@§', 'ASGA231', 'TEST11']]
+  listsDashboard: [ [ 'TEST', 'TET@', 'TEST#', 'TESFA@#!!', 'dasdasd', 'BCR#$#!' ], [ 'TEAGS@@§', 'ASGA231', 'TEST11' ] ]
 };
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -25,7 +25,7 @@ export function dashboardPlanningReducer(state: LayoutDashboard = initialState, 
     const update =action.payload.item;
     const previousUpdate =action.payload.previous;
 
-    const updateList = [...state.listsDashboard];
+    const updateList = [ ...state.listsDashboard ];
     updateList[action.payload.containerIndex.currenIndex] = update;
     updateList[action.payload.containerIndex.previousIndex] = previousUpdate;
     return <LayoutDashboard>{

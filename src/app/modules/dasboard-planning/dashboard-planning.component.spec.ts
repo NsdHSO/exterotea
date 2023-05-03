@@ -15,7 +15,7 @@ describe('DasboardPlanningComponent', () => {
   };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DashboardPlanningComponent],
+      declarations: [ DashboardPlanningComponent ],
       imports: [
         StoreModule.forRoot(
           reducers

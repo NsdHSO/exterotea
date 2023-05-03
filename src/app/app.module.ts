@@ -26,8 +26,6 @@ import {
 } from './modules/dasboard-planning/store/dashboard-planning.reducer';
 import { HttpInterceptorService } from './utils/http-interceptor.service';
 import { GetFromCPipe } from './shared/get-from-c.pipe';
-import { TooltipComponent } from './shared/tooltip/tooltip.component';
-import { GetMiddleEntityDirective } from './shared/tooltip/get-middle-entity.directive';
 
 const maskConfig: Partial<IConfig> = {
   validation: false
@@ -37,8 +35,8 @@ const maskConfig: Partial<IConfig> = {
   declarations: [ AppComponent,
     CustomHeaderComponent,
     IconNameComponent,
-    GetFromCPipe,
-    GetMiddleEntityDirective, ],
+    GetFromCPipe
+  ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -72,6 +70,7 @@ const maskConfig: Partial<IConfig> = {
     },
     MatDatepickerModule
   ],
+
   bootstrap: [ AppComponent ]
 })
 /** *************************************************************************************************

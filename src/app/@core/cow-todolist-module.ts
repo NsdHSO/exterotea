@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {CoreToDoListModule} from 'ngx-todo-list';
+import { NgModule } from '@angular/core';
+import { CoreToDoListModule } from 'ngx-todo-list';
 
 @NgModule({
   declarations: [],

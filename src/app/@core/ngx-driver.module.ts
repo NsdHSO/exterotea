@@ -3,6 +3,6 @@ import { CoreDriverModule } from 'ngx-driver';
 
 @NgModule({
   declarations: [],
-  imports: [CoreDriverModule.forRoot()]
+  imports: [ CoreDriverModule.forRoot() ]
 })
 export class NgxDriverModule {}

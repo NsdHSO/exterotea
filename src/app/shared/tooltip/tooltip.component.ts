@@ -15,34 +15,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: 'tooltip.component.html',
   styles: [ `
     .tooltip-container {
-      position: relative;
-      display: inline-block;
-    }
 
-    .tooltip-container .tooltip-content {
-      position: absolute;
-      z-index: 1;
-      top: 100%;
-      left: 50%;
-      transform: translate(-50%, 10px);
-      padding: 8px;
-      background-color: #333;
-      color: #fff;
-      border-radius: 4px;
-      font-size: 14px;
-      white-space: nowrap;
-    }
 
-    .tooltip-container .tooltip-arrow {
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      margin-left: -5px;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 5px 10px 5px;
-      border-color: transparent transparent #333 transparent;
     }
   ` ]
 })

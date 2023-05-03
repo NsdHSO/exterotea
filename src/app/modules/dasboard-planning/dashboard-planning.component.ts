@@ -1,5 +1,11 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, filter, map, merge, mergeMap, Observable, of, ReplaySubject, Subject, takeUntil } from 'rxjs';
@@ -18,6 +24,7 @@ export class DashboardPlanningComponent implements OnInit, OnDestroy {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   containerList : Observable<any>;
   user : string = '';
+  @ViewChild('rendererTemplate') rendererTemplate: TemplateRef<any> | any;
 
   /** *************************************************************************************************
    * Constructor Dashboard Planning Component

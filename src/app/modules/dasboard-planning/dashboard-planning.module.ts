@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   GetMiddleEntityDirective
 } from '../../shared/tooltip/get-middle-entity.directive';
+import { TooltipComponent } from "../../shared/tooltip/tooltip.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import {
     DashboardPlanningRoutingModule,
     DragDropModule,
     MatButtonModule,
-    GetMiddleEntityDirective
+    GetMiddleEntityDirective,
+    GetMiddleEntityDirective,
+    TooltipComponent
   ],
   exports: [
     DragDropModule

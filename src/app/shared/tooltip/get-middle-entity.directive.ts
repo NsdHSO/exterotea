@@ -2,10 +2,15 @@ import {
   ApplicationRef,
   ComponentFactoryResolver,
   ComponentRef,
+  ContentChild,
   Directive,
   ElementRef,
+  HostListener,
   Injector,
-  OnInit
+  Renderer2,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef
 } from '@angular/core';
 import { TooltipComponent } from './tooltip.component';
 
@@ -13,61 +18,70 @@ import { TooltipComponent } from './tooltip.component';
   selector: '[appGetMiddleEntity]',
   standalone: true
 })
-export class GetMiddleEntityDirective implements OnInit {
-  private componentRef: ComponentRef<any> | any;
+export class GetMiddleEntityDirective {
+  @ViewChild('rendererTemplate') rendererTemplate!: TemplateRef<any>;
+  @ContentChild(TooltipComponent) tooltipComponent!: TooltipComponent;
 
-  // Host element
-  get hostElement(): HTMLElement{
-    return this.elementRef.nativeElement;
-  }
+  private componentRef: ComponentRef<TooltipComponent> | any;
+  private tooltipRef: HTMLElement | any;
+  private clickEventListener: (() => void) | null = null;
 
   constructor(
     private appRef: ApplicationRef,
-    private componentFactoryResolver: ComponentFactoryResolver,
     private elementRef: ElementRef,
-    private injector: Injector
-  ){
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private injector: Injector,
+    private renderer: Renderer2,
+    private viewContainerRef: ViewContainerRef
+  ) {
   }
 
-  ngOnInit(){
-    // Add a click event listener to the host element
-    this.hostElement.addEventListener('mouseenter', this.onClick.bind(this));
-    this.hostElement.addEventListener(
-      'mouseout',
-      this._destroyTooltip.bind(this));
-  }
-
-  onClick(event: any){
-    const rect = this.hostElement.getBoundingClientRect();
-    const middleX = rect.left + rect.width / 2;
-    const middleY = rect.top + rect.height / 2;
-    console.log(`Middle point: (${ middleX }, ${ middleY })`);
-    this.renderComponent(middleX, middleY);
-  }
-
-  renderComponent(middlex: number, middley: number){
+  @HostListener('click', [ '$event' ])
+  onClick(event: MouseEvent) {
     if ( !this.componentRef ) {
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-        TooltipComponent);
-      this.componentRef = componentFactory.create(this.injector);
-      this.appRef.attachView(this.componentRef.hostView);
-      const domElem = (this.componentRef.hostView as any).rootNodes[ 0 ] as HTMLElement;
-      document.body.appendChild(domElem);
       const hostRect = this.elementRef.nativeElement.getBoundingClientRect();
-
-      domElem.style.position = 'fixed';
-      domElem.style.top = `${ hostRect.bottom }px`;
-      domElem.style.left = `${ middlex - domElem.getBoundingClientRect().width / 2 }px`;
-      domElem.style.zIndex = '100';
+      const middlex = hostRect.left + hostRect.width / 2;
+      this.renderComponent(middlex, this.tooltipComponent.text);
+      this.clickEventListener = this.renderer.listen(
+        window,
+        'click',
+        (clickEvent: MouseEvent) => {
+          if ( !this.elementRef.nativeElement.contains(clickEvent.target) && !this.tooltipRef?.contains(
+            clickEvent.target) ) {
+            this.destroyComponent();
+          }
+        });
+    } else if ( !this.tooltipRef?.contains(event.target as HTMLElement) ) {
+      this.destroyComponent();
     }
   }
 
-  private _destroyTooltip(){
+  private renderComponent(middlex: number, text: string) {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      TooltipComponent);
+    this.componentRef = componentFactory.create(this.injector);
+    this.componentRef.instance.text = text;
+    this.componentRef.instance.rendererTemplate = this.rendererTemplate
+    this.appRef.attachView(this.componentRef.hostView);
+    const domElem = (this.componentRef.hostView as any).rootNodes[0] as HTMLElement;
+    document.body.appendChild(domElem);
+    const hostRect = this.elementRef.nativeElement.getBoundingClientRect();
+    domElem.style.position = 'fixed';
+    domElem.style.top = `${ hostRect.bottom }px`;
+    domElem.style.left = `${ middlex - domElem.getBoundingClientRect().width / 2 }px`;
+    domElem.style.zIndex = '100';
+    this.tooltipRef = domElem;
+  }
+
+  private destroyComponent() {
     if ( this.componentRef ) {
       this.appRef.detachView(this.componentRef.hostView);
       this.componentRef.destroy();
       this.componentRef = null;
+      if ( this.clickEventListener ) {
+        this.clickEventListener();
+        this.clickEventListener = null;
+      }
     }
   }
 }
-

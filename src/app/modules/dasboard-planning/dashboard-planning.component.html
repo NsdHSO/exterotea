@@ -24,18 +24,25 @@
         class="example-list"
         (cdkDropListDropped)="drop($event)">
         <div class="example-box"
-             appGetMiddleEntity
              *ngFor="let item of (containerList|async).listsDashboard[1]"
-             cdkDrag>{{item}}</div>
+             cdkDrag
+
+        >
+
+
+
+          {{item}}</div>
+
       </div>
     </div>
   </div>
 </div>
-
-<div >
-  <button mat-raised-button appGetMiddleEntity>
-    Add
-  </button>
-
-</div>
+<button appGetMiddleEntity mat-raised-button>
+  Click me!
+  <app-tooltip [text]="'Ivan'">
+    <ng-template>
+      <div class="container">Hello, Renderer!</div>
+    </ng-template>
+  </app-tooltip>
+</button>
 

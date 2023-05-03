@@ -1,1 +1,6 @@
-<p>tooltip works!</p>
+<div class="tooltip-container">
+  <ng-container *ngIf="text">
+    <div class="tooltip-text">{{ text }}</div>
+  </ng-container>
+  <ng-container *ngTemplateOutlet="rendererTemplate"></ng-container>
+</div>

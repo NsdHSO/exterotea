@@ -3,8 +3,12 @@
   <ng-container *ngIf="text">
     <div class="tooltip-text">{{ text }}</div>
   </ng-container>
-  <ng-container *ngTemplateOutlet="rendererTemplate"></ng-container>
+  <ng-container *ngTemplateOutlet="rendererTemplate || default"></ng-container>
 </div>
+
+<ng-template #default>
+  TESADSDASD
+</ng-template>
 
 
 

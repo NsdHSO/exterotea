@@ -121,7 +121,7 @@ export class GetMiddleEntityDirective {
   private updatePosition() {
     if ( this.tooltipRef ) {
       const hostRect = this.elementRef.nativeElement.getBoundingClientRect();
-      const middlex = hostRect.left -6.4 + hostRect.width / 2;
+      const middlex = hostRect.left - 6.4 + hostRect.width / 2;
       const tooltipRect = this.tooltipRef.getBoundingClientRect();
 
       if ( window.innerHeight < tooltipRect.bottom ) {

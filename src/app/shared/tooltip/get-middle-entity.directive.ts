@@ -13,7 +13,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import { TooltipComponent } from './tooltip.component';
-import { fromEvent, Subject, takeUntil } from 'rxjs';
+import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs';
 
 @Directive({
   selector: '[appGetMiddleEntity]',
@@ -45,66 +45,106 @@ export class GetMiddleEntityDirective {
     this.middlex = this.elementRef.nativeElement.offsetWidth / 2 + this.elementRef.nativeElement.offsetLeft;
   }
 
+
   @HostListener('click', [ '$event' ])
   onClick(event: MouseEvent) {
     if (!this.componentRef) {
       const hostRect = this.elementRef.nativeElement.getBoundingClientRect();
-      this.renderComponent(hostRect);
+      const middlex = hostRect.left + hostRect.width / 2;
+      this.renderComponent(middlex, 'Tooltip Text');
       this.clickEventListener = this.renderer.listen(
         window,
         'click',
         (clickEvent: MouseEvent) => {
-          if (
-            !this.elementRef.nativeElement.contains(clickEvent.target) &&
-            !this.tooltipRef?.contains(clickEvent.target)
-          ) {
+          const domElem = (this.componentRef.hostView as any).rootNodes[0] as HTMLElement;
+          domElem.style.left = `${ middlex - domElem.getBoundingClientRect().width / 2 }px`;
+
+          if (!this.elementRef.nativeElement.contains(clickEvent.target) && !this.tooltipRef?.contains(clickEvent.target as HTMLElement)) {
             this.destroyComponent();
           }
-        }
-      );
+        });
+
+      // subscribe to window resize events and update tooltip position
+      fromEvent(window, 'resize')
+        .pipe(debounceTime(50), takeUntil(this._destroyes$))
+        .subscribe(() => {
+          const hostRect = this.elementRef.nativeElement.getBoundingClientRect();
+          const middlex = hostRect.left + hostRect.width / 2;
+          const tooltipRect = this.tooltipRef.getBoundingClientRect();
+
+          if (window.innerHeight < tooltipRect.bottom) {
+            // no space below, reposition to the top
+            this.tooltipRef.style.top = `${hostRect.top - tooltipRect.height}px`;
+          } else {
+            // position below the host element
+            this.tooltipRef.style.top = `${hostRect.bottom}px`;
+          }
+
+          if (window.innerWidth < tooltipRect.right) {
+            // no space on the right, reposition to the left
+            this.tooltipRef.style.left = `${hostRect.right - tooltipRect.width}px`;
+          } else if (middlex > tooltipRect.width / 2 && window.innerWidth - middlex > tooltipRect.width / 2) {
+            // position centered over the host element
+            this.tooltipRef.style.left = `${middlex - tooltipRect.width / 2}px`;
+          } else {
+            // position on the right of the host element
+            this.tooltipRef.style.left = `${hostRect.left}px`;
+          }
+        });
     } else if (!this.tooltipRef?.contains(event.target as HTMLElement)) {
       this.destroyComponent();
     }
   }
-
-  private renderComponent(hostRect: DOMRect) {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(TooltipComponent);
+  private renderComponent(middlex: number, text: string) {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      TooltipComponent);
     this.componentRef = componentFactory.create(this.injector);
-    this.componentRef.instance.text = 'Hello World';
-    this.componentRef.instance.rendererTemplate = this.rendererTemplate;
+    this.componentRef.instance.text = text;
+    this.componentRef.instance.rendererTemplate = this.element;
     this.appRef.attachView(this.componentRef.hostView);
     const domElem = (this.componentRef.hostView as any).rootNodes[0] as HTMLElement;
     document.body.appendChild(domElem);
+    const hostRect = this.elementRef.nativeElement.getBoundingClientRect();
     domElem.style.position = 'fixed';
+    domElem.style.top = `${hostRect.bottom}px`;
     domElem.style.zIndex = '100';
-    this.updateTooltipPosition(hostRect, domElem);
     this.tooltipRef = domElem;
 
     // Subscribe to window resize events
-    fromEvent(window, 'resize').pipe(takeUntil(this._destroyes$))
-      .subscribe(() => {
-        this.updateTooltipPosition(hostRect, domElem);
-      });
+    const resizeSubscription = fromEvent(window, 'resize').pipe(
+      debounceTime(50)
+    ).subscribe(() => {
+      this.updatePosition();
+    });
+
+    // Unsubscribe from the subscription when the tooltip is destroyed
+    this.componentRef.onDestroy(() => {
+      resizeSubscription.unsubscribe();
+    });
   }
 
-  private updateTooltipPosition(hostRect: DOMRect, tooltipElem: HTMLElement) {
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
-    const tooltipWidth = tooltipElem.offsetWidth;
-    const tooltipHeight = tooltipElem.offsetHeight;
-    const tooltipMargin = 10; // Margin between tooltip and host element
+  private updatePosition() {
+    if (this.tooltipRef) {
+      const hostRect = this.elementRef.nativeElement.getBoundingClientRect();
+      const tooltipHeight = this.tooltipRef.getBoundingClientRect().height;
+      const windowHeight = window.innerHeight;
+      const availableBottomSpace = windowHeight - hostRect.bottom - this.bottomOffset;
+      const availableTopSpace = hostRect.top - this.topOffset;
 
-    // Calculate available space around the host element
-    const spaceAbove = hostRect.top - tooltipHeight - tooltipMargin;
-    const spaceBelow = windowHeight - hostRect.bottom - tooltipMargin;
-    const spaceLeft = hostRect.left - tooltipWidth / 2;
-    const spaceRight = windowWidth - hostRect.right - tooltipWidth / 2;
+      if (availableBottomSpace < tooltipHeight && availableTopSpace >= tooltipHeight) {
+        this.tooltipRef.style.top = `${hostRect.top - tooltipHeight - this.topOffset}px`;
+        this.tooltipRef.classList.add('top');
+        this.tooltipRef.classList.remove('bottom');
+      } else {
+        this.tooltipRef.style.top = `${hostRect.bottom + this.bottomOffset}px`;
+        this.tooltipRef.classList.add('bottom');
+        this.tooltipRef.classList.remove('top');
+      }
 
-    // Set tooltip position based on available space
-    if ( spaceBelow >= tooltipHeight + tooltipMargin ) {
-      console.log('');
+      this.tooltipRef.style.left = `${hostRect.left + hostRect.width / 2}px`;
     }
   }
+
   private destroyComponent() {
     if ( this.componentRef ) {
       this.appRef.detachView(this.componentRef.hostView);

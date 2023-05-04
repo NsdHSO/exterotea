@@ -11,7 +11,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { TooltipComponent } from './tooltip.component';
-import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs';
+import { debounceTime, fromEvent, Subject } from 'rxjs';
 
 @Directive({
   selector: '[appGetMiddleEntity]',
@@ -27,7 +27,7 @@ export class GetMiddleEntityDirective {
   private clickEventListener: (() => void) | null = null;
   private _destroyer$ = new Subject();
 
-  get hostElement(): HTMLElement {
+  get hostElement(): HTMLElement{
     return this.elementRef.nativeElement;
   }
 
@@ -37,15 +37,15 @@ export class GetMiddleEntityDirective {
     private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector,
     private renderer: Renderer2
-  ) {
+  ){
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit(): void{
     this.middlex = this.elementRef.nativeElement.offsetWidth / 2 + this.elementRef.nativeElement.offsetLeft;
     this.hostElement.addEventListener('click', this.onClick.bind(this));
   }
 
-  onClick(event: MouseEvent) {
+  onClick(event: MouseEvent){
     const isButtonClicked = this.elementRef.nativeElement.contains(event.target as HTMLElement);
     const isTooltipClicked = this.tooltipRef?.contains(event.target as HTMLElement);
 
@@ -59,7 +59,7 @@ export class GetMiddleEntityDirective {
           window,
           'click',
           (clickEvent: MouseEvent) => {
-            const domElem = (this.componentRef.hostView as any).rootNodes[0] as HTMLElement;
+            const domElem = (this.componentRef.hostView as any).rootNodes[ 0 ] as HTMLElement;
             domElem.style.left = `${ middlex - domElem.getBoundingClientRect().width / 2 }px`;
             this.updatePosition();
             if ( !this.elementRef.nativeElement.contains(clickEvent.target) && !this.tooltipRef?.contains(
@@ -70,11 +70,7 @@ export class GetMiddleEntityDirective {
         );
 
         // subscribe to window resize events and update tooltip position
-        fromEvent(window, 'click')
-          .pipe(debounceTime(100), takeUntil(this._destroyer$))
-          .subscribe(() => {
-            this.updatePosition();
-          });
+
 
         this.toggleCompo = true;
       } else {
@@ -84,19 +80,19 @@ export class GetMiddleEntityDirective {
     }
   }
 
-  ngDestroy() {
+  ngDestroy(){
     this._destroyer$.next(true);
     this._destroyer$.complete();
   }
 
-  private renderComponent(middlex: number, text: string) {
+  private renderComponent(middlex: number, text: string){
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       TooltipComponent);
     this.componentRef = componentFactory.create(this.injector);
     this.componentRef.instance.text = text;
     this.componentRef.instance.rendererTemplate = this.element;
     this.appRef.attachView(this.componentRef.hostView);
-    const domElem = (this.componentRef.hostView as any).rootNodes[0] as HTMLElement;
+    const domElem = (this.componentRef.hostView as any).rootNodes[ 0 ] as HTMLElement;
     document.body.appendChild(domElem);
     domElem.style.position = 'fixed';
     domElem.style.zIndex = '100';
@@ -106,7 +102,7 @@ export class GetMiddleEntityDirective {
 
     // Subscribe to window resize events
     const resizeSubscription = fromEvent(window, 'resize').pipe(
-      debounceTime(190)
+      debounceTime(150)
     )
       .subscribe(() => {
         this.updatePosition();
@@ -118,13 +114,13 @@ export class GetMiddleEntityDirective {
     });
   }
 
-  private updatePosition() {
+  private updatePosition(){
     if ( this.tooltipRef ) {
       const hostRect = this.elementRef.nativeElement.getBoundingClientRect();
       const middlex = hostRect.left - 6.4 + hostRect.width / 2;
       const tooltipRect = this.tooltipRef.getBoundingClientRect();
 
-      if ( window.innerHeight < tooltipRect.bottom ) {
+      if ( window.innerHeight < Math.floor(tooltipRect.bottom + (tooltipRect.width / 2)) ) {
         this.tooltipRef.classList.add('top');
         this.tooltipRef.classList.remove('bottom');
 
@@ -151,7 +147,7 @@ export class GetMiddleEntityDirective {
     }
   }
 
-  private destroyComponent() {
+  private destroyComponent(){
     if ( this.componentRef ) {
       this.appRef.detachView(this.componentRef.hostView);
       this.componentRef.destroy();

@@ -1,8 +1,43 @@
+@mixin arrowPosition($position, $deg) {
+  content: "";
+  position: absolute;
+  bottom: $position;
+  left: 50%;
+  transform: translateX(-50%) rotate($deg);
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: white;
+  border-top: 0.0625rem solid rgba(0, 0, 0, 0.12);
+  border-left: 0.0625rem solid rgba(0, 0, 0, 0.12);
+}
+
 app-tooltip {
+
+  &.top {
+    &::before {
+
+
+      @include arrowPosition(-2%, 230deg)
+
+    }
+
+  }
+
+  &.bottom {
+    &::before {
+      @include arrowPosition(83%, 45deg)
+    }
+
+  }
+
+
   .tooltip-container {
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0rem 0.0625rem 0.1875rem, rgba(0, 0, 0, 0.24) 0rem 0.0625rem 0.125rem;
     padding: 1rem;
     margin: 0.5rem;
     background: white;
   }
+}
+:host{
+  margin: .4rem;
 }

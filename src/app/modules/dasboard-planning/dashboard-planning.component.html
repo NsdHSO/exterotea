@@ -1,7 +1,4 @@
-<button appGetMiddleEntity mat-raised-button [element]="diffusion">
 
-  teasdasd
-</button>
 <div class="content">
   <div class="content__header">
     <div class="example-container">
@@ -12,10 +9,13 @@
         [cdkDropListData]="(containerList|async)?.listsDashboard[0]"
         [cdkDropListConnectedTo]="[doneList]"
         class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box"
-             *ngFor="let item of (containerList|async)?.listsDashboard[0]"
-             cdkDrag>{{item}}</div>
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="example-box"
+          *ngFor="let item of (containerList|async)?.listsDashboard[0]"
+          cdkDrag
+        >{{item}}</div>
       </div>
     </div>
     <div class="example-container">
@@ -26,14 +26,15 @@
         [cdkDropListData]="(containerList|async).listsDashboard[1]"
         [cdkDropListConnectedTo]="[todoList]"
         class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box"
-             *ngFor="let item of (containerList|async).listsDashboard[1]"
-             cdkDrag
-             appGetMiddleEntity
-             [element] = "diffusion"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="example-box"
+          *ngFor="let item of (containerList|async).listsDashboard[1]"
+          cdkDrag
+          appGetMiddleEntity
+          [element]="diffusion"
         >
-
 
 
           {{item}}</div>
@@ -48,6 +49,11 @@
   <ng-container>
 
     Ivan
-    <button appGetMiddleEntity mat-raised-button [element]="diffusion">TESDASD</button>
+    <button
+      appGetMiddleEntity
+      mat-raised-button
+      [element]="diffusion"
+    >TESDASD
+    </button>
   </ng-container>
 </ng-template>

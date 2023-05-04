@@ -26,6 +26,10 @@ import {
 } from './modules/dasboard-planning/store/dashboard-planning.reducer';
 import { HttpInterceptorService } from './utils/http-interceptor.service';
 import { GetFromCPipe } from './shared/get-from-c.pipe';
+import {
+  GetMiddleEntityDirective
+} from "./shared/tooltip/get-middle-entity.directive";
+import { MatButtonModule } from "@angular/material/button";
 
 const maskConfig: Partial<IConfig> = {
   validation: false
@@ -50,7 +54,9 @@ const maskConfig: Partial<IConfig> = {
     NgxMaskModule.forRoot(maskConfig),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ logOnly: !environment.production }),
-    TableMaterialModule
+    TableMaterialModule,
+    GetMiddleEntityDirective,
+    MatButtonModule
   ],
   providers: [
     Store,

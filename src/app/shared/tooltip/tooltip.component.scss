@@ -1,9 +1,9 @@
-@mixin arrowPosition($position, $deg) {
+@mixin arrowPosition($position, $deg, $left, $translateX) {
   content: "";
   position: absolute;
   bottom: $position;
-  left: 50%;
-  transform: translateX(-50%) rotate($deg);
+  left: $left;
+  transform: translateX($translateX) rotate($deg);
   width: 1.25rem;
   height: 1.25rem;
   background-color: white;
@@ -17,7 +17,7 @@ app-tooltip {
     &::before {
 
 
-      @include arrowPosition(-2%, 230deg)
+      @include arrowPosition(-2%, 230deg, 50%,50%)
 
     }
 
@@ -25,12 +25,16 @@ app-tooltip {
 
   &.bottom {
     &::before {
-      @include arrowPosition(83%, 45deg)
+      @include arrowPosition(83%, 45deg, 50%,50%)
     }
-
   }
 
+  &.left {
+    &::before {
+      @include arrowPosition(41%, 315deg, -0.2rem,0%)
 
+    }
+  }
   .tooltip-container {
     box-shadow: rgba(0, 0, 0, 0.12) 0rem 0.0625rem 0.1875rem, rgba(0, 0, 0, 0.24) 0rem 0.0625rem 0.125rem;
     padding: 1rem;

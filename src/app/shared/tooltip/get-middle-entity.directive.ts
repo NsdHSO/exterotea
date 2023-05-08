@@ -77,6 +77,8 @@ export class GetMiddleEntityDirective {
     const button = this.el.nativeElement;
     let tooltipRect = this.componentRef.location.nativeElement.getBoundingClientRect();
     const buttonRect = button.getBoundingClientRect();
+    const availableSpaceRight = window.innerWidth - buttonRect.right;
+    const availableSpaceBottom = window.innerHeight - buttonRect.bottom - buttonRect.height;
 
     if ( this.componentRef ) {
       this.componentRef.changeDetectorRef.detectChanges();
@@ -97,9 +99,6 @@ export class GetMiddleEntityDirective {
       if ( buttonRect.bottom + tooltipRect.height < window.innerHeight ) {
         console.log('not enough space below' + 2);
         // not enough space below, position tooltip above the button
-        const margin = 10;
-        const availableSpaceRight = window.innerWidth - buttonRect.right;
-        const availableSpaceBottom = window.innerHeight - buttonRect.bottom - buttonRect.height;
 
         if (tooltipRect.width <= availableSpaceRight) {
           position = {
@@ -129,6 +128,13 @@ export class GetMiddleEntityDirective {
             left: buttonRect.x + buttonRect.width + margin
           };
         }
+      }
+      // not enough space right side
+      if (availableSpaceBottom < tooltipRect.height /2 ) {
+        position = {
+          top: buttonRect.bottom - buttonRect.height / 2 - tooltipRect.height / 2,
+          left: buttonRect.x - tooltipRect.width - margin
+        };
       }
     } else {
       console.log('not enough space below' + 3);

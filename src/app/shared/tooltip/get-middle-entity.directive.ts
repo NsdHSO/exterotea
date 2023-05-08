@@ -27,11 +27,11 @@ export class GetMiddleEntityDirective {
     private injector: Injector,
     private appRef: ApplicationRef,
     private viewContainerRef: ViewContainerRef
-  ){
+  ) {
   }
 
   @HostListener('click', [ '$event' ])
-  toggleComponent(){
+  toggleComponent() {
     if ( this.componentRef ) {
       this.componentRef.destroy();
       this.componentRef = null;
@@ -42,7 +42,7 @@ export class GetMiddleEntityDirective {
       this.componentRef.instance.rendererTemplate = this.element;
 
       // find the app-root element
-      const appRoot = document.getElementsByTagName('app-root')[ 0 ] as any;
+      const appRoot = document.getElementsByTagName('app-root')[0] as any;
 
       // add the tooltip component as a sibling of the app-root
       appRoot.parentElement.insertBefore(
@@ -60,7 +60,7 @@ export class GetMiddleEntityDirective {
   }
 
   @HostListener('document:click', [ '$event' ])
-  closeComponent(event: MouseEvent){
+  closeComponent(event: MouseEvent) {
     // check if the target element is inside the tooltip or the toggle button
     const isInsideTooltip = this.componentRef && this.componentRef.location.nativeElement.contains(
       event.target);
@@ -73,7 +73,7 @@ export class GetMiddleEntityDirective {
     }
   }
 
-  private positionTooltipAndComponent(tooltip: any){
+  private positionTooltipAndComponent(tooltip: any) {
     const button = this.el.nativeElement;
     let tooltipRect = this.componentRef.location.nativeElement.getBoundingClientRect();
     const buttonRect = button.getBoundingClientRect();
@@ -116,6 +116,13 @@ export class GetMiddleEntityDirective {
             top: buttonRect.bottom + margin,
             left: buttonRect.right - tooltipRect.width / 2 - buttonRect.width / 2
           };
+
+          if (buttonRect.right < tooltipRect.width / 2) {
+            position.left = buttonRect.left - margin;
+          }
+          if (availableSpaceRight < tooltipRect.width /2) {
+            position.left = buttonRect.left - buttonRect.width /2 + margin - tooltipRect.width/2;
+          }
         } else {
           position = {
             top: buttonRect.top - tooltipRect.height - margin,
@@ -147,7 +154,7 @@ export class GetMiddleEntityDirective {
     this.componentRef.location.nativeElement.style.left = `${ position.left }px`;
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     if ( this.componentRef ) {
       this.componentRef.destroy();
       this.componentRef = null;

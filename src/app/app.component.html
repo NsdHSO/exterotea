@@ -3,23 +3,46 @@
     <button
       appGetMiddleEntity
       mat-raised-button
-      [element]="diffusion"
+      [element]="diffusion1"
     >
-
       teasdasd
     </button>
-  </div>
-  <ng-template #diffusion>
-    <ng-container>
 
+    <p   appGetMiddleEntity
+         [element]="diffusion2">
       Ivan
+    </p>
+  </div>
+
+  <ng-template #diffusion1>
+    <div>
       <button
         appGetMiddleEntity
         mat-raised-button
-        [element]="diffusion"
-      >TESDASD
+        [element]="diffusion1"
+      >
+        teasdasd
       </button>
-    </ng-container>
+
+      <p   appGetMiddleEntity
+           [element]="diffusion2">
+        Ivan
+      </p>
+
+      <div>
+
+        <div>
+          dasdasdasdas
+        </div>
+        dasdasdasdas
+      </div>
+    </div>
+    <div>
+      dasdasdasdas
+    </div>
   </ng-template>
 
+  <ng-template #diffusion2>
+    second Ion
+  </ng-template>
 </div>

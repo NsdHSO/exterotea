@@ -6,7 +6,7 @@ describe('GetFromCPipe', () => {
     const pipe = new GetFromCPipe();
     expect(pipe).toBeTruthy();
   });
-  fit('should return formControl', () => {
+  it('should return formControl', () => {
     const pipe = new GetFromCPipe();
     const a = new FormGroup({
       name: new FormControl('ivn')

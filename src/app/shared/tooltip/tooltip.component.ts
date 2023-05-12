@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   Input,
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: 'tooltip.component.html',
   styleUrls: ['tooltip.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TooltipComponent implements OnInit, AfterContentInit {
   @Input() rendererTemplate: any;

@@ -52,6 +52,8 @@ app-tooltip {
     background: white;
     width: max-content;
     display: flex;
+    flex-direction: column;
+
   }
 }
 

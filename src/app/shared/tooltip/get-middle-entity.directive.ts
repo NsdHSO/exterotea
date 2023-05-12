@@ -79,11 +79,14 @@ export class GetMiddleEntityDirective {
     const buttonRect = button.getBoundingClientRect();
     const availableSpaceRight = window.innerWidth - buttonRect.right;
     const availableSpaceBottom = window.innerHeight - buttonRect.bottom - buttonRect.height;
+    const availableSpaceTop = window.innerHeight - buttonRect.top - buttonRect.height;
+    const availableSpaceLeft = window.innerWidth - buttonRect.left;
 
     if ( this.componentRef ) {
       this.componentRef.changeDetectorRef.detectChanges();
     }
     const margin = 10;
+    const marginInnerTooltip = 8;
     let position = {
       top: buttonRect.top + buttonRect.height / 2 - tooltipRect.height / 2,
       left: buttonRect.left + buttonRect.width / 2 - tooltipRect.width / 2
@@ -100,42 +103,69 @@ export class GetMiddleEntityDirective {
         console.log('not enough space below' + 2);
         // not enough space below, position tooltip above the button
 
-        if (tooltipRect.width <= availableSpaceRight) {
+        if ( tooltipRect.width <= availableSpaceRight ) {
           position = {
             top: buttonRect.top + buttonRect.height + margin,
             left: buttonRect.right - tooltipRect.width / 2 - buttonRect.width / 2
           };
-        } else if (tooltipRect.height <= availableSpaceBottom) {
+        } else if ( tooltipRect.height <= availableSpaceBottom ) {
           // position = {
           //   top: buttonRect.bottom - buttonRect.height / 2 - tooltipRect.height / 2,
           //   left: buttonRect.x - tooltipRect.width - margin
           // };
-
-          position = {
-            top: buttonRect.bottom + margin,
-            left: buttonRect.right - tooltipRect.width / 2 - buttonRect.width / 2
-          };
-
-          if (buttonRect.right < tooltipRect.width / 2) {
+          if ( tooltipRect.width < availableSpaceTop ) {
+            position.left = buttonRect.left + buttonRect.width / 2 - tooltipRect.width / 2 - margin;
+          }
+          if ( buttonRect.right < tooltipRect.width / 2 ) {
             position.left = buttonRect.left - margin;
           }
-          if (availableSpaceRight < tooltipRect.width /2) {
-            position.left = buttonRect.left - buttonRect.width /2 + margin - tooltipRect.width/2;
+          if ( tooltipRect.width + (3 * margin) < window.innerWidth - buttonRect.width - (2 * margin) ) {
+            position = {
+              top: buttonRect.y - (tooltipRect.height / 2) + (buttonRect.height / 2),
+              left: buttonRect.left - (tooltipRect.width) - margin
+            };
+          } else if ( tooltipRect.width + (3 * margin) < window.innerWidth - buttonRect.height ) {
+            position = {
+              top: buttonRect.bottom + margin,
+              left: buttonRect.right - (tooltipRect.width) + marginInnerTooltip
+            };
           }
+        } else if ( availableSpaceLeft > (tooltipRect.width + margin) ) {
+          position.left = buttonRect.left - tooltipRect.width - margin;
+          position.top = buttonRect.y - (tooltipRect.height / 2) + (buttonRect.height / 2);
         } else {
           position = {
             top: buttonRect.top - tooltipRect.height - margin,
             left: buttonRect.x + buttonRect.width + margin
           };
         }
-      }
-      // not enough space right side
-      if (availableSpaceBottom < tooltipRect.height /2 ) {
+
+        if ( tooltipRect.width < window.innerWidth - buttonRect.left + (buttonRect.width / 2) ) {
+          position = {
+            top: buttonRect.bottom + margin,
+            left: buttonRect.left + buttonRect.width / 2 - tooltipRect.width / 2 - margin
+
+          };
+        }
+        if ( tooltipRect.width > window.innerWidth ) {
+          position.top = buttonRect.top - tooltipRect.height - margin;
+          position.left = buttonRect.right - (tooltipRect.width) + marginInnerTooltip;
+        }
+      } else if ( buttonRect.bottom + tooltipRect.height > window.innerHeight ) {
+        // when in bottom you don't have enough space
         position = {
-          top: buttonRect.bottom - buttonRect.height / 2 - tooltipRect.height / 2,
-          left: buttonRect.x - tooltipRect.width - margin
+          top: buttonRect.y - (tooltipRect.height / 2) + (buttonRect.height / 2) - margin,
+          left: buttonRect.right - (tooltipRect.width) + marginInnerTooltip
         };
       }
+
+      // // not enough space right side
+      // if ( availableSpaceBottom < tooltipRect.height / 2 ) {
+      //   position = {
+      //     top: buttonRect.bottom - buttonRect.height / 2 - tooltipRect.height / 2,
+      //     left: buttonRect.x - tooltipRect.width - margin
+      //   };
+      // }
     } else {
       console.log('not enough space below' + 3);
       const spaceToRight = window.innerWidth - buttonRect.right;
@@ -151,6 +181,23 @@ export class GetMiddleEntityDirective {
           top: buttonRect.top + (buttonRect.height - tooltipRect.height) / 2,
           left: buttonRect.right + margin
         };
+      }
+      if ( buttonRect.top - tooltipRect.height < 0) {
+        position.top = buttonRect.bottom + margin;
+      }
+    }
+    if ( buttonRect.bottom <= window.innerHeight ) {
+      position = {
+        top: buttonRect.top - tooltipRect.height - margin,
+        left: buttonRect.right - (tooltipRect.width) + marginInnerTooltip
+      };
+
+      if ( buttonRect.right - (buttonRect.width / 2) - tooltipRect.width / 2 ) {
+        position.left = buttonRect.right - (buttonRect.width / 2) - tooltipRect.width / 2;
+      }
+
+      if ( buttonRect.bottom - buttonRect.height - tooltipRect.width < 0 ) {
+        position.top = buttonRect.bottom + margin;
       }
     }
 

@@ -182,7 +182,7 @@ export class GetMiddleEntityDirective {
           left: buttonRect.right + margin
         };
       }
-      if ( buttonRect.top - tooltipRect.height < 0) {
+      if ( buttonRect.top - tooltipRect.height < 0 ) {
         position.top = buttonRect.bottom + margin;
       }
     }
@@ -194,6 +194,12 @@ export class GetMiddleEntityDirective {
 
       if ( buttonRect.right - (buttonRect.width / 2) - tooltipRect.width / 2 ) {
         position.left = buttonRect.right - (buttonRect.width / 2) - tooltipRect.width / 2;
+        if ( tooltipRect.height - buttonRect.y < 0 && availableSpaceTop > tooltipRect.height) {
+          position.top = buttonRect.bottom + margin;
+        }
+        if (buttonRect.top - tooltipRect.height - 2*margin < 0) {
+          position.top = buttonRect.bottom + margin;
+        }
       }
 
       if ( buttonRect.bottom - buttonRect.height - tooltipRect.width < 0 ) {

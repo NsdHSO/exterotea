@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomHeaderComponent } from './custom-header.component';
+import { TooltipComponent } from './tooltip.component';
 
-describe('CustomHeaderComponent', () => {
-  let component: CustomHeaderComponent;
-  let fixture: ComponentFixture<CustomHeaderComponent>;
+describe('TooltipComponent', () => {
+  let component: TooltipComponent;
+  let fixture: ComponentFixture<TooltipComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CustomHeaderComponent ]
+      declarations: [ TooltipComponent ]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(CustomHeaderComponent);
+    fixture = TestBed.createComponent(TooltipComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

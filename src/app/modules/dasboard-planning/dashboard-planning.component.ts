@@ -1,14 +1,20 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {BehaviorSubject, filter, map, merge, mergeMap, Observable, of, ReplaySubject, Subject, takeUntil} from "rxjs";
+import { BehaviorSubject, filter, map, merge, mergeMap, Observable, of, ReplaySubject, Subject, takeUntil } from 'rxjs';
 import { MoveInsideList } from './store/dashboard-planning.actions';
 
 @Component({
   selector: 'app-dasboard-planning',
   templateUrl: './dashboard-planning.component.html',
-  styleUrls: ['./dashboard-planning.component.scss']
+  styleUrls: [ './dashboard-planning.component.scss' ]
 })
 /** *************************************************************************************************
  * Dashboard Planning Component
@@ -18,6 +24,7 @@ export class DashboardPlanningComponent implements OnInit, OnDestroy {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   containerList : Observable<any>;
   user : string = '';
+  @ViewChild('rendererTemplate') rendererTemplate: TemplateRef<any> | any;
 
   /** *************************************************************************************************
    * Constructor Dashboard Planning Component
@@ -70,7 +77,7 @@ export class DashboardPlanningComponent implements OnInit, OnDestroy {
       10
     );
     if (event.previousContainer === event.container) {
-      const array = [...event.container.data];
+      const array = [ ...event.container.data ];
       const temp = array[event.previousIndex];
       if (event.currentIndex - event.previousIndex >= 2) {
         for (let i = event.previousIndex; i < event.currentIndex; i++) {
@@ -83,7 +90,7 @@ export class DashboardPlanningComponent implements OnInit, OnDestroy {
         }
         array[event.currentIndex] = temp;
       } else {
-        [array[event.previousIndex], array[event.currentIndex]] = [
+        [ array[event.previousIndex], array[event.currentIndex] ] = [
           array[event.currentIndex],
           array[event.previousIndex]
         ];
@@ -106,8 +113,8 @@ export class DashboardPlanningComponent implements OnInit, OnDestroy {
       );
     } else {
       const item = event.previousContainer.data[event.previousIndex];
-      const array = [...event.previousContainer.data];
-      const currentArray = [...event.container.data];
+      const array = [ ...event.previousContainer.data ];
+      const currentArray = [ ...event.container.data ];
       for (
         let i = event.previousIndex;
         i <= event.previousContainer.data.length - 1;

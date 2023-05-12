@@ -8,10 +8,13 @@
         [cdkDropListData]="(containerList|async)?.listsDashboard[0]"
         [cdkDropListConnectedTo]="[doneList]"
         class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box"
-             *ngFor="let item of (containerList|async)?.listsDashboard[0]"
-             cdkDrag>{{item}}</div>
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="example-box"
+          *ngFor="let item of (containerList|async)?.listsDashboard[0]"
+          cdkDrag
+        >{{item}}</div>
       </div>
     </div>
     <div class="example-container">
@@ -22,12 +25,85 @@
         [cdkDropListData]="(containerList|async).listsDashboard[1]"
         [cdkDropListConnectedTo]="[todoList]"
         class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box"
-             *ngFor="let item of (containerList|async).listsDashboard[1]"
-             cdkDrag>{{item}}</div>
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="example-box"
+          *ngFor="let item of (containerList|async).listsDashboard[1]"
+          cdkDrag
+          appGetMiddleEntity
+          [element]="diffusion"
+        >
+
+
+          {{item}}</div>
+
       </div>
     </div>
   </div>
 </div>
+<div class="d-flex justify-content-end">
+  <button
+    mat-raised-button
+    appGetMiddleEntity
+    [element]="diffusion"
+  >
+    click ME
+  </button>
+</div>
 
+<ng-template #diffusion>
+  <ng-container>
+    <div>
+
+      dasdasd
+    </div>
+    Ivan
+    <button
+      appGetMiddleEntity
+      mat-raised-button
+      [element]="diffusion"
+    >TESDASD
+    </button>
+    <div>
+      <div>
+
+        dasdasd
+      </div>
+      <div>
+
+        dasdasd
+      </div>
+      <div>
+
+        dasdasd
+      </div>
+      dasdasd
+    </div>
+    Ivan
+    <div>
+
+      dasdasd
+    </div>
+    <div>
+      <div>
+        <div>
+
+          dasdasd
+        </div>
+        dasdasd
+      </div>
+      dasdasd
+    </div>
+    <div>
+
+      dasdasd
+    </div>
+    <button
+      appGetMiddleEntity
+      mat-raised-button
+      [element]="diffusion"
+    >TESDASD
+    </button>
+  </ng-container>
+</ng-template>

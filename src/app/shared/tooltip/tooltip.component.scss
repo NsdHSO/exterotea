@@ -1,0 +1,59 @@
+@mixin arrowPosition($position, $deg, $left, $translateX) {
+  content: "";
+  position: absolute;
+  bottom: $position;
+  left: $left;
+  transform: translateX($translateX) rotate($deg);
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: white;
+  border-top: 0.0625rem solid rgba(0, 0, 0, 0.12);
+  border-left: 0.0625rem solid rgba(0, 0, 0, 0.12);
+}
+
+app-tooltip {
+  :host{
+    margin: .4rem;
+    width: max-content;
+  }
+  &.right {&::before {
+    background: red;
+  }}
+  //&.top {
+  //  &::before {
+  //
+  //
+  //    @include arrowPosition(-2%, 230deg, 39%,50%)
+  //
+  //  }
+  //
+  //}
+  //
+  //&.bottom {
+  //  &::before {
+  //    @include arrowPosition(89%, 45deg, 45%,50%)
+  //  }
+  //}
+  //
+  //&.right {
+  //  &::before {
+  //    @include arrowPosition(41%, 315deg, -0.2rem,0%)
+  //  }
+  //}
+  //&.left {
+  //  &::before {
+  //    @include arrowPosition(41%, 135deg, 96%,0%)
+  //  }
+  //}
+  .tooltip-container {
+    box-shadow: rgba(0, 0, 0, 0.12) 0rem 0.0625rem 0.1875rem, rgba(0, 0, 0, 0.24) 0rem 0.0625rem 0.125rem;
+    padding: 1rem;
+    margin: 0.5rem;
+    background: white;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+
+  }
+}
+

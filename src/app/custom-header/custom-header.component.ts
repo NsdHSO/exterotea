@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-custom-header',
   templateUrl: './custom-header.component.html',
-  styleUrls: ['./custom-header.component.scss']
+  styleUrls: [ './custom-header.component.scss' ]
 })
 /** *************************************************************************************************
  * Header Component

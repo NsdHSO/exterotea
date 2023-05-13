@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BarComponent } from './bar/bar.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TooltipComponent } from "../../shared/tooltip/tooltip.component";
+import { AxisComponent } from "./axis/axis.component";
 
 const routes: Routes =[ {
   path: '',
@@ -16,7 +17,8 @@ const routes: Routes =[ {
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    TooltipComponent
+    TooltipComponent,
+    AxisComponent
   ],
   exports: [
     RouterModule

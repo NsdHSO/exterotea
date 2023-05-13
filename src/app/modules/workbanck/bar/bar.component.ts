@@ -9,7 +9,7 @@ import { ReserveType } from '../utils/reserve-type';
 export class BarComponent implements OnInit {
   reserveType: ReserveType = {
     months: 7,
-    reserve: 0.3,
+    reserve: 5.9,
     axis:
       {
         recommendationReserve: {
@@ -31,7 +31,31 @@ export class BarComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit():void {}
+  ngOnInit():void {
+    // setInterval(()=>{
+    //   this.reserveType = {
+    //     months: 7,
+    //     reserve: Math.random() * (0 - 5) + 5,
+    //     axis:
+    //     {
+    //       recommendationReserve: {
+    //         start: 3,
+    //         end: 5,
+    //         label: 'ivan',
+    //         backgroundColor: '#F4F6FA',
+    //         color: '#5C7999'
+    //       },
+    //       excessCashReserve: {
+    //         start: 3,
+    //         end: 5,
+    //         label: 'ivan',
+    //         backgroundColor: '#F4F6FA',
+    //         color: '#5C7999'
+    //       }
+    //     }
+    //   };
+    // }, 500);
+  }
 }
 
 

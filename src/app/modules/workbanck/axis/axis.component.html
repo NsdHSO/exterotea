@@ -17,7 +17,7 @@
             <div [style.display]="'flex'">
                 <div
                     [style.width.rem]="
-                        months.reserve > index && months.reserve < index + 1
+                        months.reserve >= index && months.reserve < index + 1
                             ? ((+(months.reserve - Math.trunc(months.reserve))
                                   .toFixed(3)
                                   .split('.')[1]
@@ -26,7 +26,7 @@
                                   100) *
                               3.4
                             : !lastIndex
-                            ? '3.4'
+                            ? '3'
                             : 12.5
                     "
                     [style.background-color]="
@@ -41,15 +41,15 @@
                     [style.border-top-left-radius.px]="firstIndex ? 5 : 0"
                 ></div>
                 <div
-                    *ngIf="months.reserve > index && months.reserve < index + 1"
+                    *ngIf="months.reserve >= index && months.reserve < index + 1"
                     [style.width.rem]="
-                        3.4 -
+                        (3.4 -
                         (((months.reserve - Math.trunc(months.reserve)) * 100) /
                             100) *
-                            3.4
+                            3.4) +0.28
                     "
                     [style.background-color]="
-                        months.reserve > index && months.reserve < index + 1
+                        months.reserve >= index && months.reserve < index + 1
                             ? '#ECF4FC'
                             : ''
                     "

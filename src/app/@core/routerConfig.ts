@@ -39,6 +39,11 @@ export const CONFIG_MAIN = Object.freeze({
       path: 'toDoList',
       icon: 'fa_regular:design_objective',
       text: 'To Do list Cow'
+    },
+    {
+      path: 'work',
+      icon: 'fa_regular:design_objective',
+      text: 'WorkBanck'
     }
   ],
   iconApp: ''

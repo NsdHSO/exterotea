@@ -1,1 +1,78 @@
-<p>axis works!</p>
+<div [style.display]="'flex'">
+    <ng-container
+        *ngFor="
+            let number of Array(months.months);
+            let index = index;
+            let lastIndex = last;
+            let firstIndex = first
+        "
+    >
+        <div
+            [style.width.rem]="!lastIndex ? '3.4' : 12.5"
+            [attr.danger]="index > 2 ? index : 'Ivan'"
+            [style.gap.rem]="1 / 2"
+            [style.display]="'flex'"
+            [style.flex-direction]="'column'"
+        >
+            <div [style.display]="'flex'">
+                <div
+                    [style.width.rem]="
+                        months.reserve > index && months.reserve < index + 1
+                            ? ((+(months.reserve - Math.trunc(months.reserve))
+                                  .toFixed(3)
+                                  .split('.')[1]
+                                  .split('')[0] *
+                                  10) /
+                                  100) *
+                              3.4
+                            : !lastIndex
+                            ? '3.4'
+                            : 12.5
+                    "
+                    [style.background-color]="
+                        index > Math.floor(months.reserve)
+                            ? '#ECF4FC'
+                            : '#0075FF'
+                    "
+                    [style.height.rem]="1"
+                    [style.border-top-right-radius.px]="lastIndex ? 5 : 0"
+                    [style.border-bottom-right-radius.px]="lastIndex ? 5 : 0"
+                    [style.border-bottom-left-radius.px]="firstIndex ? 5 : 0"
+                    [style.border-top-left-radius.px]="firstIndex ? 5 : 0"
+                ></div>
+                <div
+                    *ngIf="months.reserve > index && months.reserve < index + 1"
+                    [style.width.rem]="
+                        3.4 -
+                        (((months.reserve - Math.trunc(months.reserve)) * 100) /
+                            100) *
+                            3.4
+                    "
+                    [style.background-color]="
+                        months.reserve > index && months.reserve < index + 1
+                            ? '#ECF4FC'
+                            : ''
+                    "
+                ></div>
+            </div>
+            <span
+                [style.color]="'#7F7F7F'"
+                [style.display]="lastIndex ? 'flex' : 'block'"
+                [style.justify-content]="lastIndex ? 'space-between' : ''"
+            >
+                {{ index }}
+
+                <span *ngIf="lastIndex" [style.color]="'#7F7F7F'"
+                    >{{ 'text' }}
+                    {{
+                        3.4 -
+                            (((months.reserve - Math.trunc(months.reserve)) *
+                                100) /
+                                100) *
+                                3.4
+                    }}
+                </span>
+            </span>
+        </div>
+    </ng-container>
+</div>

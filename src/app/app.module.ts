@@ -28,8 +28,8 @@ import { HttpInterceptorService } from './utils/http-interceptor.service';
 import { GetFromCPipe } from './shared/get-from-c.pipe';
 import {
   GetMiddleEntityDirective
-} from "./shared/tooltip/get-middle-entity.directive";
-import { MatButtonModule } from "@angular/material/button";
+} from './shared/tooltip/get-middle-entity.directive';
+import { MatButtonModule } from '@angular/material/button';
 
 const maskConfig: Partial<IConfig> = {
   validation: false

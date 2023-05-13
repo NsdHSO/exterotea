@@ -3,6 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'email',
+    loadChildren: () =>
+      import('./@core/email.module').then(
+        (m) => m.NgxEmailModule)
+  },
+  {
     path: 'product',
     loadChildren: () => import('./@core/product.module').then(
       (m) => m.NgxProductModule)
@@ -34,6 +40,12 @@ const routes: Routes = [
         (m) => m.NgxCowMeatModule)
   },
   {
+    path: 'work',
+    loadChildren: () =>
+      import('./modules/workbanck/workbanck.module').then(
+        (m) => m.WorkbanckModule)
+  },
+  {
     path: 'to-do',
     loadChildren: () =>
       import('./@core/toDo.module').then(
@@ -44,12 +56,7 @@ const routes: Routes = [
     loadChildren: () => import('./@core/cow-todolist-module').then(
       (m) => m.NgxCowToDoListModule)
   },
-  {
-    path: '',
-    loadChildren: () =>
-      import('./@core/email.module').then(
-        (m) => m.NgxEmailModule)
-  }
+
 ];
 
 @NgModule({

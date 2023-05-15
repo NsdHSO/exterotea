@@ -37,12 +37,19 @@ export class SetLabelDirective {
     const label = document.createElement('div');
     label.innerText = 'Label text';
     label.style.position = 'absolute';
-    label.style.top = `${firstElementRect.top - 60 + 16}px`;
-    label.style.left = `${firstElementRect.left}px`;
+    label.style.top = `${firstElementRect.top - 60 }px`;
+    // add + 1 to be in the center
+    label.style.left = `${firstElementRect.left+ 1 }px `;
+    label.style.width = `${lastElementRect.left - firstElementRect.left}px`;
     label.style.fontSize = '12px';
     label.style.fontWeight = 'bold';
     label.style.zIndex = '20';
-
-    document.body.appendChild(label)
+    label.style.color ='#5C7999';
+    label.style.background = '#F4F6FA';
+    label.style.padding = '11px 26px';
+    label.style.display = 'flex';
+    label.style.justifyContent= 'center';
+    label.style.alignItems='center';
+    document.body.appendChild(label);
   }
 }

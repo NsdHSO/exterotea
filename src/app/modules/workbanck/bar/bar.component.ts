@@ -21,7 +21,7 @@ export class BarComponent implements OnInit {
           color: '#5C7999'
         },
         excessCashReserve: {
-          start: 6,
+          start: 5,
           end: 7,
           label: 'ivan',
           backgroundColor: '#F4F6FA',

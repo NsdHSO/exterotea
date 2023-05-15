@@ -8,8 +8,9 @@ import { ReserveType } from '../utils/reserve-type';
 })
 export class BarComponent implements OnInit {
   reserveType: ReserveType = {
+    labelHowMuchYouCanSurvive: 'TEXT 2 TEXT 34 TEXT 2 TEXT 34 TEXT 2 TEXT 34 ',
     months: 7,
-    reserve: 5.95,
+    reserve: 5.25,
     axis:
       {
         recommendationReserve: {

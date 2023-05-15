@@ -2,6 +2,7 @@ export interface ReserveType {
   months: number
   reserve: number
   axis: Axis
+  labelHowMuchYouCanSurvive: string
 }
 
 export interface Label {

@@ -13,14 +13,14 @@ export class BarComponent implements OnInit {
     axis:
       {
         recommendationReserve: {
-          start: 2,
-          end: 5,
+          start: 3,
+          end: 4,
           label: 'ivan',
           backgroundColor: '#F4F6FA',
           color: '#5C7999'
         },
         excessCashReserve: {
-          start: 5,
+          start: 6,
           end: 7,
           label: 'ivan',
           backgroundColor: '#F4F6FA',

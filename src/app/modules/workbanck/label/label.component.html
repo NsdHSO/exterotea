@@ -1,0 +1,6 @@
+<div class="label-container">
+  <div class="line" *ngFor="let rect of rects" [style.left.px]="rect.left" [style.top.px]="rect.top"></div>
+  <div class="label" [style.top.px]="labelTop" [style.left.px]="labelLeft" [style.width.px]="labelWidth">
+    {{labelText}}
+  </div>
+</div>

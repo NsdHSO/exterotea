@@ -1,11 +1,27 @@
-import { Directive, ElementRef } from '@angular/core';
+import {
+  AfterViewInit,
+  ComponentFactoryResolver,
+  Directive,
+  ElementRef,
+  Input,
+  ViewContainerRef
+} from '@angular/core';
+import { LabelComponent } from './label/label.component';
 
 @Directive({
   selector: '[appSetLabel]',
   standalone: true
 })
-export class SetLabelDirective {
-  constructor(private elementRef: ElementRef) {}
+export class SetLabelDirective implements AfterViewInit {
+  @Input()
+    recommendationLabel: string = '';
+  @Input()
+    excessCashLabel: string = '';
+  constructor(
+    private elementRef: ElementRef,
+    private viewContainerRef: ViewContainerRef,
+    private componentFactoryResolver: ComponentFactoryResolver) {
+  }
 
   ngAfterViewInit() {
     this.extractRecomendationReferences();
@@ -16,40 +32,26 @@ export class SetLabelDirective {
     const recomendationDivs: any = Array.from(divs).filter(
       (div: any) => div.getAttribute('recomendation') === 'true'
     );
-    console.table(recomendationDivs);
-    const firstElement = recomendationDivs[0];
-    const firstElementRect = firstElement.getBoundingClientRect();
-    const lastElement = recomendationDivs[recomendationDivs.length - 1];
-    const lastElementRect = lastElement.getBoundingClientRect();
-    Array(firstElementRect, lastElementRect).forEach((i) => {
-      const line = document.createElement('div');
-      line.style.position = 'absolute';
-      line.style.width = '1px';
-      line.style.height = '60px';
-      line.style.borderLeft = '2px dashed #A3B5C9';
-      line.style.zIndex = '20';
-
-      line.style.left = `${i.left}px`;
-      line.style.top = `${firstElementRect.top - 60 + 16}px`;
-
-      document.body.appendChild(line);
+    const excessCash: any = Array.from(divs).filter(
+      (div: any) => div.getAttribute('excessCash') === 'true'
+    );
+    [ { element: recomendationDivs, label: this.recommendationLabel, lastElement: false },
+      { element: excessCash, label: this.excessCashLabel, lastElement: true } ].forEach((element) => {
+      this.createComponent(element);
     });
-    const label = document.createElement('div');
-    label.innerText = 'Label text';
-    label.style.position = 'absolute';
-    label.style.top = `${firstElementRect.top - 60 }px`;
-    // add + 1 to be in the center
-    label.style.left = `${firstElementRect.left+ 1 }px `;
-    label.style.width = `${lastElementRect.left - firstElementRect.left}px`;
-    label.style.fontSize = '12px';
-    label.style.fontWeight = 'bold';
-    label.style.zIndex = '20';
-    label.style.color ='#5C7999';
-    label.style.background = '#F4F6FA';
-    label.style.padding = '11px 26px';
-    label.style.display = 'flex';
-    label.style.justifyContent= 'center';
-    label.style.alignItems='center';
-    document.body.appendChild(label);
+  }
+
+  createComponent(elements: any) {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      LabelComponent);
+    const componentRef = this.viewContainerRef.createComponent(componentFactory);
+    componentRef.instance.labelText = elements.label;
+    componentRef.instance.recomendationDivs = elements.element;
+    componentRef.instance.isLast = elements.lastElement;
+    const componentElement = componentRef.location.nativeElement;
+    const hostElement = this.elementRef.nativeElement;
+
+    // Adăugați componentElement la hostElement sau la alt element din ierarhia DOM a directivei
+    hostElement.appendChild(componentElement);
   }
 }

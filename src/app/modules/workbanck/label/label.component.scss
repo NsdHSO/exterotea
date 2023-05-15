@@ -1,0 +1,22 @@
+.line {
+  position: absolute;
+  width: 1px;
+  height: 60px;
+  border-left: 2px dashed #A3B5C9;
+  z-index: 20;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 20;
+  color: #5C7999;
+  background-color: #F4F6FA;
+  padding: 11px 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

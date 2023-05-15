@@ -17,6 +17,11 @@ export class SetLabelDirective implements AfterViewInit {
     recommendationLabel: string = '';
   @Input()
     excessCashLabel: string = '';
+
+  @Input()
+    labelColor: string ='#5C7999';
+  @Input()
+    labelBackgroundColor : string = '#F4F6FA';
   constructor(
     private elementRef: ElementRef,
     private viewContainerRef: ViewContainerRef,
@@ -36,7 +41,7 @@ export class SetLabelDirective implements AfterViewInit {
       (div: any) => div.getAttribute('excessCash') === 'true'
     );
     [ { element: recomendationDivs, label: this.recommendationLabel, lastElement: false },
-      { element: excessCash, label: this.excessCashLabel, lastElement: true } ].forEach((element) => {
+      { element: excessCash, label: this.excessCashLabel, lastElement: true, labelColor: '#FFFFFF', labelBackground: '#A3B5C9' } ].forEach((element) => {
       this.createComponent(element);
     });
   }
@@ -48,6 +53,8 @@ export class SetLabelDirective implements AfterViewInit {
     componentRef.instance.labelText = elements.label;
     componentRef.instance.recomendationDivs = elements.element;
     componentRef.instance.isLast = elements.lastElement;
+    componentRef.instance.labelBackgroundColor = elements?.labelBackground;
+    componentRef.instance.labelColor = elements?.labelColor;
     const componentElement = componentRef.location.nativeElement;
     const hostElement = this.elementRef.nativeElement;
 

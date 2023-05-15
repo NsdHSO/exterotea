@@ -12,10 +12,14 @@ export class LabelComponent implements OnInit {
   @Input() recomendationDivs: any;
   @Input() labelText: any;
   @Input() isLast: boolean = false;
+  @Input() labelColor: string ='#5C7999';
+  @Input()
+    labelBackgroundColor : string = '#F4F6FA';
   rects: { left: number; top: number }[] = [];
   labelTop: number = 0;
   labelLeft: number = 0;
   labelWidth: number = 0;
+  mouseIn: boolean = false;
 
   ngOnInit() {
     if (this.recomendationDivs && this.recomendationDivs.length > 0) {
@@ -40,5 +44,9 @@ export class LabelComponent implements OnInit {
       this.labelTop = firstElementRect.top - 60;
       this.labelLeft = firstElementRect.left + 1;
     }
+  }
+
+  public mouseOver(): void {
+    this.mouseIn = !this.mouseIn;
   }
 }

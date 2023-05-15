@@ -1,6 +1,24 @@
-<div class="label-container">
-  <div class="line" *ngFor="let rect of rects" [style.left.px]="rect.left" [style.top.px]="rect.top"></div>
-  <div class="label" [style.top.px]="labelTop" [style.left.px]="labelLeft" [style.width.px]="labelWidth">
+<div
+  class="label-container"
+  (mouseout)="mouseOver()"
+  (mouseenter)="mouseOver()"
+  [style.opacity]="mouseIn? 0.98: 1"
+>
+  <div
+    class="label-container__line"
+    *ngFor="let rect of rects"
+    [style.left.px]="rect.left"
+    [style.top.px]="rect.top"
+    [style.border-color]="mouseIn ? '#626e7b' : '#A3B5C9'"
+  ></div>
+  <div
+    class="label-container__label"
+    [style.top.px]="mouseIn ? labelTop - 10 : labelTop"
+    [style.left.px]="labelLeft"
+    [style.width.px]="labelWidth"
+    [style.background-color] = 'labelBackgroundColor'
+    [style.color] = 'labelColor'
+  >
     {{labelText}}
   </div>
 </div>

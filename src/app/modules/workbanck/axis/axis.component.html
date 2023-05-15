@@ -1,4 +1,8 @@
-<div [style.display]="'flex'">
+<div [style.display]="'flex'"
+
+     appSetLabel
+
+>
     <ng-container
         *ngFor="
             let number of Array(months.months);
@@ -6,10 +10,18 @@
             let lastIndex = last;
             let firstIndex = first
         "
+
     >
         <div
             [style.width.rem]="!lastIndex ? '3.4' : 12.5"
-            [attr.danger]="index > 2 ? index : 'Ivan'"
+            [attr.recomendation]="
+                index >= months.axis.recommendationReserve.start &&
+                index <= months.axis.recommendationReserve.end
+            "
+            [attr.excessCash]="
+                index >= months.axis.excessCashReserve.start &&
+                index <= months.axis.excessCashReserve.end
+            "
             [style.gap.rem]="1 / 2"
             [style.display]="'flex'"
             [style.flex-direction]="'column'"
@@ -26,7 +38,7 @@
                                   100) *
                               3.4
                             : !lastIndex
-                            ? '3'
+                            ? '3.4'
                             : 12.5
                     "
                     [style.background-color]="
@@ -41,12 +53,15 @@
                     [style.border-top-left-radius.px]="firstIndex ? 5 : 0"
                 ></div>
                 <div
-                    *ngIf="months.reserve >= index && months.reserve < index + 1"
+                    *ngIf="
+                        months.reserve >= index && months.reserve < index + 1
+                    "
                     [style.width.rem]="
-                        (3.4 -
+                        3.4 -
                         (((months.reserve - Math.trunc(months.reserve)) * 100) /
                             100) *
-                            3.4) +0.28
+                            3.4 +
+                        0.28
                     "
                     [style.background-color]="
                         months.reserve >= index && months.reserve < index + 1
@@ -64,13 +79,6 @@
 
                 <span *ngIf="lastIndex" [style.color]="'#7F7F7F'"
                     >{{ 'text' }}
-                    {{
-                        3.4 -
-                            (((months.reserve - Math.trunc(months.reserve)) *
-                                100) /
-                                100) *
-                                3.4
-                    }}
                 </span>
             </span>
         </div>

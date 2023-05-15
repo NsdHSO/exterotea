@@ -9,7 +9,7 @@ import { ReserveType } from '../utils/reserve-type';
 export class BarComponent implements OnInit {
   reserveType: ReserveType = {
     months: 7,
-    reserve: 5.9,
+    reserve: 5.95,
     axis:
       {
         recommendationReserve: {
@@ -20,8 +20,8 @@ export class BarComponent implements OnInit {
           color: '#5C7999'
         },
         excessCashReserve: {
-          start: 3,
-          end: 5,
+          start: 5,
+          end: 7,
           label: 'ivan',
           backgroundColor: '#F4F6FA',
           color: '#5C7999'

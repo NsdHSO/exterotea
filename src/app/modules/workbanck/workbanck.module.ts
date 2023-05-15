@@ -5,14 +5,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { TooltipComponent } from "../../shared/tooltip/tooltip.component";
 import { AxisComponent } from "./axis/axis.component";
 
-const routes: Routes =[ {
+const routes: Routes = [ {
   path: '',
   component: BarComponent
 } ];
 
 @NgModule({
   declarations: [
-    BarComponent
+    BarComponent,
   ],
   imports: [
     CommonModule,
@@ -20,8 +20,7 @@ const routes: Routes =[ {
     TooltipComponent,
     AxisComponent
   ],
-  exports: [
-    RouterModule
-  ]
+
 })
-export class WorkbanckModule { }
+export class WorkbanckModule {
+}

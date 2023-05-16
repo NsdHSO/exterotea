@@ -6,7 +6,7 @@ import {
   Input,
   ViewContainerRef
 } from '@angular/core';
-import { LabelComponent } from './label/label.component';
+import { LabelComponent } from '../components/charAxes/label/label.component';
 
 @Directive({
   selector: '[appSetLabel]',
@@ -19,9 +19,10 @@ export class SetLabelDirective implements AfterViewInit {
     excessCashLabel: string = '';
 
   @Input()
-    labelColor: string ='#5C7999';
+    labelColor: string = '#5C7999';
   @Input()
-    labelBackgroundColor : string = '#F4F6FA';
+    labelBackgroundColor: string = '#F4F6FA';
+
   constructor(
     private elementRef: ElementRef,
     private viewContainerRef: ViewContainerRef,
@@ -40,8 +41,18 @@ export class SetLabelDirective implements AfterViewInit {
     const excessCash: any = Array.from(divs).filter(
       (div: any) => div.getAttribute('excessCash') === 'true'
     );
-    [ { element: recomendationDivs, label: this.recommendationLabel, lastElement: false },
-      { element: excessCash, label: this.excessCashLabel, lastElement: true, labelColor: '#FFFFFF', labelBackground: '#A3B5C9' } ].forEach((element) => {
+    [ {
+      element: recomendationDivs,
+      label: this.recommendationLabel,
+      lastElement: false
+    },
+    {
+      element: excessCash,
+      label: this.excessCashLabel,
+      lastElement: true,
+      labelColor: '#FFFFFF',
+      labelBackground: '#A3B5C9'
+    } ].forEach((element) => {
       this.createComponent(element);
     });
   }

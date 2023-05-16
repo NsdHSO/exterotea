@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActualStateDirective } from "../actual-state.directive";
+import { ActualStateDirective } from '../../../directive/actual-state.directive';
 
 @Component({
   selector: 'app-actual-state-label',
@@ -9,12 +9,7 @@ import { ActualStateDirective } from "../actual-state.directive";
   templateUrl: './actual-state-label.component.html',
   styleUrls: [ './actual-state-label.component.scss' ]
 })
-export class ActualStateLabelComponent implements OnInit {
+export class ActualStateLabelComponent {
   @Input()
-    label: string='';
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+    label: string = '';
 }

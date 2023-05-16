@@ -1,3 +1,4 @@
+$background: #292A2B;
 .container-actual-state {
   position: absolute;
   z-index: 20;
@@ -9,7 +10,7 @@
     height: 120px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    border-left: 4px solid #A3B5C9;
+    border-left: 4px solid $background;
     z-index: 20;
     display: flex;
     flex-direction: column-reverse;
@@ -19,7 +20,7 @@
     &__arrow {
       width: 14px;
       height: 14px;
-      background: #A3B5C9;
+      background: $background;
       transform: rotate(45deg);
       left: -9px;
       position: absolute;
@@ -29,7 +30,7 @@
 
   &__information {
     color: white;
-    background: #A3B5C9;
+    background: $background;
     z-index: 30;
     position: relative;
     padding: .3rem;

@@ -1,0 +1,32 @@
+<div
+  [formGroup]="form"
+  [style.gap.rem]="1"
+  [style.display]="'flex'"
+  [style.flex-direction]="'column'"
+
+>
+  <div   [style.gap.rem]="0.5"
+         [style.display]="'flex'"
+         [style.flex-direction]="'column'">
+    <div>
+      <input [formControlName]="'age'">
+
+    </div>
+    <div>
+      <input [formControlName]="'monney'">
+
+    </div>
+  </div>
+
+  <div
+    [style.display]="'flex'"
+    [style.justify-content]="'space-between'"
+
+  >
+    <button mat-raised-button
+      [disabled]="form.untouched"
+            (click)="resetForm()"
+    > reset</button>
+    <button mat-raised-button> Send</button>
+  </div>
+</div>

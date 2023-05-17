@@ -6,6 +6,11 @@ import { AxisComponent } from './components/charAxes/axis/axis.component';
 import { BarComponent } from './components/charAxes/bar/bar.component';
 import { WorkbanckComponent } from './workbanck.component';
 import { MatButtonModule } from "@angular/material/button";
+import { UsersTComponent } from './components/formsTe/users-t/users-t.component';
+import {
+  GetMiddleEntityDirective
+} from "../../shared/tooltip/get-middle-entity.directive";
+import { ReactiveFormsModule } from "@angular/forms";
 
 const routes: Routes = [ {
   path: '',
@@ -15,14 +20,17 @@ const routes: Routes = [ {
 @NgModule({
   declarations: [
     BarComponent,
-    WorkbanckComponent
+    WorkbanckComponent,
+    UsersTComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     TooltipComponent,
     AxisComponent,
-    MatButtonModule
+    MatButtonModule,
+    GetMiddleEntityDirective,
+    ReactiveFormsModule
   ]
 
 })

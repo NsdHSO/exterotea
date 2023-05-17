@@ -1,7 +1,12 @@
 <button mat-button (click)="toggleB()">
   toggle button
 </button>
-
+<button mat-raised-button appGetMiddleEntity [element]="formState"> Toogle Form  </button>
 <ng-container *ngIf="toggleBar">
   <app-bar></app-bar>
 </ng-container>
+
+<ng-template #formState>
+  <app-users-t [form]="form"></app-users-t>
+</ng-template>
+

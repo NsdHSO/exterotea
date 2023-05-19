@@ -16,6 +16,13 @@
       <input [formControlName]="'monney'">
 
     </div>
+    <div>
+      <input formControlName="ageMax">
+
+    </div>
+    <div *ngIf="form.errors?.ageBeGreater && form.touched">
+rtasdasd
+    </div>
   </div>
 
   <div
@@ -24,9 +31,9 @@
 
   >
     <button mat-raised-button
-      [disabled]="form.untouched"
+      [disabled]="form.untouched || hasDiffValue"
             (click)="resetForm()"
     > reset</button>
-    <button mat-raised-button> Send</button>
+    <button mat-raised-button [disabled]="form.invalid || form.pristine"> Send</button>
   </div>
 </div>

@@ -8,18 +8,31 @@ import { UntypedFormGroup } from '@angular/forms';
 })
 export class UsersTComponent implements OnInit {
   @Input()
-  form: UntypedFormGroup | any;
+    form: UntypedFormGroup | any;
 
-  constructor (){
+  constructor() {
   }
 
-  ngOnInit (): void{
+  ngOnInit(): void {
   }
 
-  public resetForm (): void{
+  get hasDiffValue(): boolean {
+    const value = this.form.getRawValue();
+    return JSON.stringify({
+      age: '',
+      ageMax: ''
+    }) === JSON.stringify({
+      age: value.age,
+      ageMax: value.ageMax
+    });
+  }
+
+  public resetForm(): void {
     this.form.patchValue({
-      age: null,
-      monney: ''
-    })
+      age: '',
+      monney: '',
+      ageMax: ''
+    });
+    this.form.updateValueAndValidity();
   }
 }

@@ -33,6 +33,12 @@ export class UsersTComponent implements OnInit {
       monney: '',
       ageMax: ''
     });
+    this.form.markAsDirty()
+    this.form.updateValueAndValidity();
+  }
+
+  public clickSend (): void{
+    this.form.markAsPristine()
     this.form.updateValueAndValidity();
   }
 }

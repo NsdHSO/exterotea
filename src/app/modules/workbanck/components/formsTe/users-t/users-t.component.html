@@ -34,6 +34,7 @@ rtasdasd
       [disabled]="form.untouched || hasDiffValue"
             (click)="resetForm()"
     > reset</button>
-    <button mat-raised-button [disabled]="form.invalid || form.pristine"> Send</button>
+    <button mat-raised-button [disabled]="form.invalid || form.pristine "  (click)="clickSend()"> Send
+    </button>
   </div>
 </div>

@@ -17,9 +17,9 @@ import { TooltipComponent } from './tooltip.component';
 })
 export class GetMiddleEntityDirective {
   @Input() element: any;
-
+  @Input()
+  public triggered = false;
   private componentRef: ComponentRef<any> | any;
-
 
   constructor(
     private el: ElementRef,
@@ -33,6 +33,7 @@ export class GetMiddleEntityDirective {
   @HostListener('click', [ '$event' ])
   toggleComponent() {
     if ( this.componentRef ) {
+      this.triggered = false;
       this.componentRef.destroy();
       this.componentRef = null;
     } else {
@@ -54,7 +55,7 @@ export class GetMiddleEntityDirective {
 
       // set the top and left positions of the tooltip component
       this.positionTooltipAndComponent(this.componentRef);
-      this.componentRef.location.nativeElement.style.zIndex = '100';
+      this.componentRef.location.nativeElement.style.zIndex = '98';
       this.componentRef.changeDetectorRef.detectChanges();
     }
   }
@@ -67,7 +68,7 @@ export class GetMiddleEntityDirective {
     const isToggleButton = this.el.nativeElement === event.target || this.el.nativeElement.contains(
       event.target);
 
-    if ( this.componentRef && !isInsideTooltip && !isToggleButton ) {
+    if ( this.triggered && this.componentRef && !isInsideTooltip && !isToggleButton ) {
       this.componentRef.destroy();
       this.componentRef = null;
     }
@@ -194,10 +195,10 @@ export class GetMiddleEntityDirective {
 
       if ( buttonRect.right - (buttonRect.width / 2) - tooltipRect.width / 2 ) {
         position.left = buttonRect.right - (buttonRect.width / 2) - tooltipRect.width / 2;
-        if ( tooltipRect.height - buttonRect.y < 0 && availableSpaceTop > tooltipRect.height) {
+        if ( tooltipRect.height - buttonRect.y < 0 && availableSpaceTop > tooltipRect.height ) {
           position.top = buttonRect.bottom + margin;
         }
-        if (buttonRect.top - tooltipRect.height - 2*margin < 0) {
+        if ( buttonRect.top - tooltipRect.height - 2 * margin < 0 ) {
           position.top = buttonRect.bottom + margin;
         }
       }

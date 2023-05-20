@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   UntypedFormControl,
   UntypedFormGroup,
   ValidatorFn
 } from '@angular/forms';
-import { tap } from 'rxjs';
+import { debounceTime, Subject, takeUntil, tap } from 'rxjs';
 
-export function ageBeGreater(age : any, maxAge: any): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
+export function ageBeGreater(age: any, maxAge: any): ValidatorFn {
+  return (control: AbstractControl): {[ key: string ]: any} | null => {
     // Perform validation logic using 'age' and 'maxAge'
-    if (+age.value > +maxAge.value&& +maxAge.value <= 0) {
+    if ( +age.value > +maxAge.value && +maxAge.value <= 0 ) {
       return { ageBeGreater: true };
     }
 
@@ -23,11 +23,13 @@ export function ageBeGreater(age : any, maxAge: any): ValidatorFn {
   templateUrl: './workbanck.component.html',
   styleUrls: [ './workbanck.component.scss' ]
 })
-export class WorkbanckComponent implements OnInit {
+export class WorkbanckComponent implements OnInit, OnDestroy {
   public toggleBar: any;
   public form: UntypedFormGroup | any;
   public togglForm: any;
-  public triggered = false
+  public triggered = false;
+  private _destroy$ = new Subject();
+
   constructor() {
     this.form = new UntypedFormGroup({
       search: new UntypedFormControl('', {}),
@@ -40,18 +42,28 @@ export class WorkbanckComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.form.valueChanges.pipe(tap(console.log)).subscribe();
+    this.form.valueChanges.pipe(debounceTime(1000),
+      tap(console.log),
+      tap(() => this.form.setValidators([ ageBeGreater(
+        this.form.controls.age,
+        this.form.controls.ageMax) ])
+      ),
+      takeUntil(this._destroy$)).subscribe();
 
-    this.form.setValidators([ ageBeGreater(this.form.controls.age, this.form.controls.ageMax) ]);
-    this.form.updateValueAndValidity()
+    this.form.updateValueAndValidity();
   }
 
   toggleB() {
-    this.triggered = !this.triggered
+    this.triggered = !this.triggered;
     this.toggleBar = !this.toggleBar;
   }
 
   public toogleForm(): void {
     this.togglForm = !this.togglForm;
+  }
+
+  public ngOnDestroy(): void {
+    this._destroy$.next(true);
+    this._destroy$.complete();
   }
 }
